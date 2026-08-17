@@ -12,15 +12,6 @@ multi-ecosystem-groups:
       cronjob: "0 16 * * *"
 
 updates:
-  - package-ecosystem: "pnpm"
-    directory: "/"
-    cooldown:
-      default-days: 7
-    versioning-strategy: "increase"
-    multi-ecosystem-group: "all"
-    assignees:
-      - "adamdodev"
-      - "jme-h"
   - package-ecosystem: "npm"
     directory: "/"
     cooldown:
