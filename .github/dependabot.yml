@@ -26,7 +26,6 @@ updates:
     directory: "/"
     cooldown:
       default-days: 7
-    versioning-strategy: "increase"
     multi-ecosystem-group: "all"
     patterns: ["*"]
     assignees:
