@@ -1,0 +1,34 @@
+---
+import CardGrid from './CardGrid.astro';
+
+interface Props {
+  step4Heading: string;
+  step4Body: string;
+}
+
+const { step4Heading, step4Body } = Astro.props;
+
+const items = [
+  {
+    heading: '01. Encrypted at rest',
+    body: 'Your files are encrypted on our UK servers. The data stored on our infrastructure is in encrypted form, which provides meaningful protection in the event of a storage breach and ensures your files are not sitting as readable plain text on any server.',
+  },
+  {
+    heading: '02. No access to file contents',
+    body: 'Bigby does not open, scan, or read the contents of what you store. We have no business reason to and our data processing terms prohibit it.',
+  },
+  {
+    heading: '03. No AI training or secondary use',
+    body: 'Your stored content is not used for AI training, advertising targeting, or any analysis of any kind. The subscription fee covers the cost of running the service. That is the entire arrangement.',
+  },
+  { heading: step4Heading, body: step4Body },
+];
+---
+
+<CardGrid
+  heading="How Bigby works"
+  subhead="Unlike the major cloud platforms, Bigby does not scan, analyse, or profit from the files you store. Here is how that works."
+  items={items}
+  anchorId="how-it-works"
+  bgClass="bg-body-tertiary"
+/>

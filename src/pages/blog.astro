@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function postHref(post: (typeof posts)[number]) {
+  const year = String(post.data.date.getFullYear());
+  const month = String(post.data.date.getMonth() + 1).padStart(2, '0');
+  return `/${year}/${month}/${post.id}/`;
+}
+---
+
+<Base title="Blog | Bigby.cloud" description="News and writing from Bigby on UK data sovereignty, privacy, and encrypted cloud storage.">
+  <Header />
+  <main>
+    <section class="py-5">
+      <div class="container" style="max-width: 720px;">
+        <h1 class="mb-4">Blog</h1>
+        {
+          posts.map((post) => (
+            <a href={postHref(post)} class="d-block text-decoration-none text-body mb-5">
+              <Image src={post.data.image} alt={post.data.imageAlt} class="img-fluid rounded mb-3" loading="lazy" width={800} />
+              <h2 class="h4">{post.data.title}</h2>
+              <p class="text-body-secondary small mb-2">
+                By {post.data.author} &middot; {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </p>
+              <p class="text-body-secondary">{post.data.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

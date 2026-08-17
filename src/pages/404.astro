@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base
+  title="Page not found | Bigby.cloud"
+  description="We could not find that page. Head back to the homepage or take a look at Bigby.drive."
+  noindex={true}
+>
+  <Header />
+  <main>
+    <section class="py-5 text-center">
+      <div class="container" style="max-width: 560px;">
+        <p class="fs-5 text-body-secondary mb-2">404</p>
+        <h1>We could not find that page</h1>
+        <p class="fs-5 text-body-secondary">
+          The link may be out of date, or we may have moved something. Here is where most people are heading:
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+          <a class="btn btn-primary btn-lg" href="/">Back to the homepage</a>
+          <a class="btn btn-outline-primary btn-lg" href="/drive/">See Bigby.drive</a>
+        </div>
+        <p class="mt-4 mb-0">
+          Still stuck? <a href="/report-an-issue/">Tell us about it</a> and we will fix the link.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

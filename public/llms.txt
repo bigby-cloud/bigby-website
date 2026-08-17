@@ -1,0 +1,52 @@
+# Bigby.cloud
+
+> Bigby is a UK cloud storage company offering private, encrypted file storage and collaboration for individuals, families and small teams. Files are encrypted at rest on UK servers. Bigby does not scan stored content, does not train AI on it, and does not sell or share user data. The service is funded entirely by subscriptions, with no advertising and no free tier.
+
+Key facts:
+
+- UK company, UK servers, UK data residency. UK GDPR is the governing framework. No US parent company and no exposure to the US CLOUD Act.
+- Files are encrypted at rest on UK infrastructure. Bigby does not open, scan or read the contents of stored files.
+- Stored content is never used for AI training, advertising targeting or analysis of any kind.
+- Subscription funded and independent, with no venture capital. The business model does not depend on user data.
+- WebDAV supported, so files can always be exported with standard tools. No lock-in and no export fees.
+- Built on an open source stack.
+- Paid plans only, billed annually, priced per user per month in GBP. Available on web and desktop.
+
+Plans:
+
+- Storage (files only): 100GB at £3.99, 500GB at £6.99, 1TB at £9.99 per user per month.
+- Office (storage plus Collabora docs, spreadsheets and presentations): 100GB at £5.99, 500GB at £9.99, 1TB at £12.99 per user per month.
+- Group (Office tier at bulk pricing, minimum 3 users): 100GB at £4.99, 500GB at £7.99, 1TB at £11.99 per user per month.
+- Storage top-up: extra 100GB for £1.49 per month on any plan.
+
+## Product
+
+- [Bigby.drive](https://bigby.cloud/drive/): product overview and full pricing
+- [Waiting list](https://bigby.cloud/waiting-list/): sign up for launch
+
+## Comparisons
+
+- [How Bigby compares](https://bigby.cloud/compare/): hub for all comparison pages
+- [UK alternative to Google Drive](https://bigby.cloud/uk-alternative-to-google-drive/): why people switch and what changes
+- [Bigby vs Google Drive](https://bigby.cloud/bigby-drive-vs-google-drive/): honest side-by-side comparison
+- [Bigby vs Dropbox](https://bigby.cloud/bigby-drive-vs-dropbox/): honest side-by-side comparison
+- [Bigby vs OneDrive](https://bigby.cloud/bigby-drive-vs-onedrive/): honest side-by-side comparison
+- [Best private cloud storage UK](https://bigby.cloud/best-private-cloud-storage-uk/): roundup including Proton Drive, Tresorit, Sync.com, pCloud and MEGA
+
+## Who Bigby is for
+
+- [Privacy-conscious users](https://bigby.cloud/for-privacy/): the alternative to data-harvesting cloud storage
+- [UK data residency](https://bigby.cloud/for-uk-data-residency/): data under UK law with no US jurisdiction
+- [Therapists](https://bigby.cloud/for-therapists/): session notes and client records
+- [Law firms](https://bigby.cloud/for-law-firms/): confidential client files
+- [Accountants](https://bigby.cloud/for-accountants/): client financial records
+- [Journalists](https://bigby.cloud/for-journalists/): source protection
+- [Medical professionals](https://bigby.cloud/for-medical/): patient information
+- [Financial advisers](https://bigby.cloud/for-financial-advisors/): client financial data
+- [HR professionals](https://bigby.cloud/for-hr/): employee records
+- [Creatives](https://bigby.cloud/for-creatives/): work that stays out of AI training sets
+- [Content creators](https://bigby.cloud/for-content-creators/): footage and content backup
+- [Families](https://bigby.cloud/for-families/): photos and documents
+- [Personal use](https://bigby.cloud/for-personal/): private personal storage
+- [Expats](https://bigby.cloud/for-expats/): UK law protection from abroad
+- [Data breach survivors](https://bigby.cloud/for-data-breach-survivors/): storage with no data trail

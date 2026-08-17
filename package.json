@@ -1,0 +1,21 @@
+{
+  "name": "bigby-website",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "24.19.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "7.1.6",
+    "bootstrap": "5.3.8",
+    "sass": "1.102.0"
+  }
+}

@@ -1,0 +1,8 @@
+---
+import { getEntry } from 'astro:content';
+import PersonaTemplate from '../layouts/PersonaTemplate.astro';
+
+const entry = await getEntry('personas', 'families');
+---
+
+<PersonaTemplate title='Private Family Cloud Storage | UK, Encrypted | Bigby' description='Family photos and documents stored on encrypted UK servers, not mined for advertising or AI training. Honest pricing from £3.99 per month.' persona={entry.data} />

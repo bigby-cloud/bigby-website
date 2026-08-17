@@ -1,0 +1,147 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TwoColumnIntro from '../components/TwoColumnIntro.astro';
+import LinkListGrid from '../components/LinkListGrid.astro';
+import chalkCliffs from '../assets/images/heather-wang-UrgsGl7iBsk-unsplash-1.jpg';
+import deskCoffee from '../assets/images/ian-dooley-DJ7bWa-Gwks-unsplash.jpg';
+import triMonitorDesk from '../assets/images/max-duzij-qAjJk-un3BI-unsplash.jpg';
+---
+
+<Base
+  title="Private UK Cloud Storage, Encrypted at Rest | Bigby.cloud"
+  description="Private, encrypted cloud storage built and run in the UK. No data harvesting, no AI training on your files. Plans from £3.99 per month."
+>
+  <Header />
+  <main>
+    <section class="py-5 text-center">
+      <div class="container">
+        <h1 class="display-4">Private, encrypted cloud storage<br /><strong>born and built in the UK</strong></h1>
+        <p class="fs-5 col-lg-8 mx-auto">
+          Say <strong>NO</strong> to Big Tech duopolies, personal data harvesting, and one-sided Terms of Service.
+          For individuals, families, and organisations.
+        </p>
+        <a class="btn btn-primary btn-lg" href="/waiting-list/">Join the Bigby.drive Waiting List</a>
+      </div>
+    </section>
+
+    <TwoColumnIntro
+      heading="Why Bigby?"
+      paragraphs={[
+        "If you're fed up with multi-national Big Tech eating up your personal data to sell to advertisers, spending millions pushing AI services you never asked for, and hiding behind anti-consumer contracts and tax havens, well, we are too.",
+        "So we've built Bigby.cloud, a transparent, ethically driven alternative for your files, documents, and office suite. Fully UK-based for data sovereignty and accountability, and always open source first.",
+      ]}
+      image={chalkCliffs}
+      imageAlt="The Seven Sisters chalk cliffs on the Sussex coast"
+    />
+    <div class="container">
+      <a class="btn btn-outline-primary" href="/compare/">See how Bigby compares to Big Tech</a>
+    </div>
+
+    <section class="py-5">
+      <div class="container">
+        <h2 class="mb-4">Our Products &amp; Services</h2>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <Image
+              src={deskCoffee}
+              alt="Desk with a laptop, notebook and coffee"
+              class="img-fluid rounded mb-3"
+              loading="lazy"
+              width={800}
+            />
+            <h3><a href="/drive/">File Storage, Office, &amp; Collaboration</a></h3>
+            <p class="fs-5">
+              Fast, secure, and flexible. <a href="/drive/">Bigby.drive</a> is our privacy-first file storage, office,
+              and collaboration platform.
+            </p>
+            <p class="fs-5">Perfect for day-to-day file management and backups, both in your browser and on your desktop.</p>
+          </div>
+          <div class="col-md-6">
+            <Image
+              src={triMonitorDesk}
+              alt="Developer working at a desk with three monitors"
+              class="img-fluid rounded mb-3"
+              loading="lazy"
+              width={800}
+            />
+            <h3><a href="https://github.com/bigby-cloud">Open Source</a></h3>
+            <p class="fs-5">
+              Bigby.cloud is built on Open Source, and we're proud to pay it back with our own Open Source tools and
+              upstream contributions.
+            </p>
+            <p class="fs-5">Visit us on <a href="https://github.com/bigby-cloud">GitHub</a> to see what we're working on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <LinkListGrid
+      heading="Who is Bigby for?"
+      intro="Private, encrypted UK cloud storage works differently depending on what you need to protect. Find the page written for you:"
+      layout="full"
+      colClass="col-md-4"
+      groups={[
+        {
+          heading: 'For work',
+          links: [
+            { label: 'Cloud storage for professionals', href: '/for-professionals/' },
+            { label: 'Cloud storage for law firms', href: '/for-law-firms/' },
+            { label: 'Cloud storage for accountants', href: '/for-accountants/' },
+            { label: 'Cloud storage for financial advisers', href: '/for-financial-advisors/' },
+            { label: 'Cloud storage for therapists', href: '/for-therapists/' },
+            { label: 'Cloud storage for medical professionals', href: '/for-medical/' },
+            { label: 'Cloud storage for HR', href: '/for-hr/' },
+            { label: 'Cloud storage for journalists', href: '/for-journalists/' },
+            { label: 'Cloud storage for creatives', href: '/for-creatives/' },
+            { label: 'Cloud storage for content creators', href: '/for-content-creators/' },
+          ],
+        },
+        {
+          heading: 'For home',
+          links: [
+            { label: 'Personal cloud storage', href: '/for-personal/' },
+            { label: 'Storage without data harvesting', href: '/for-privacy/' },
+            { label: 'Family cloud storage', href: '/for-families/' },
+            { label: 'UK cloud storage for expats', href: '/for-expats/' },
+            { label: 'UK data residency', href: '/for-uk-data-residency/' },
+            { label: 'After a data breach', href: '/for-data-breach-survivors/' },
+          ],
+        },
+        {
+          heading: 'Compare us',
+          links: [
+            { label: 'How Bigby compares', href: '/compare/' },
+            { label: 'UK alternative to Google Drive', href: '/uk-alternative-to-google-drive/' },
+            { label: 'Bigby vs Google Drive', href: '/bigby-drive-vs-google-drive/' },
+            { label: 'Bigby vs Dropbox', href: '/bigby-drive-vs-dropbox/' },
+            { label: 'Bigby vs OneDrive', href: '/bigby-drive-vs-onedrive/' },
+            { label: 'Best private cloud storage UK', href: '/best-private-cloud-storage-uk/' },
+          ],
+        },
+      ]}
+    />
+
+    <section class="py-5 bg-body-tertiary text-center">
+      <div class="container">
+        <h2>You made it this far!</h2>
+        <p class="fs-5 col-lg-8 mx-auto text-body-secondary">
+          You must also believe we can rebuild a more ethical, transparent, and open internet. That Small Tech, built
+          locally by people we can meet, is better than faceless multi-nationals with infinite funds stifling
+          competition.
+        </p>
+        <p class="fs-5 col-lg-8 mx-auto text-body-secondary">
+          Whether you want to sign up and support our cause, or reach out and tell us about a project we might be
+          interested in, we'd love to hear from you:
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap mt-3">
+          <a class="btn btn-primary btn-lg" href="/waiting-list/">Join the Bigby.drive Waiting List</a>
+          <a class="btn btn-outline-primary btn-lg" href="mailto:support@bigby.cloud">Contact us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

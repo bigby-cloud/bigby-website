@@ -1,0 +1,73 @@
+// @font-face {
+//   font-family: 'Fredoka';
+//   font-style: normal;
+//   font-weight: 300 700;
+//   font-display: swap;
+//   src: url('../assets/fonts/fredoka-variable-latin.woff2') format('woff2');
+// }
+
+// Bootstrap variable overrides. These must come before the Bootstrap import.
+$primary: #eda400;
+
+// The brand amber only reaches 2.1:1 against white, well below the 4.5:1 WCAG AA
+// minimum, so anything drawn as text or as a border uses a darker shade of the
+// same hue (5.3:1). Solid fills keep the brand amber with black text on top.
+$brand-ink: #007a7a;
+$brand-ink-hover: #005050;
+
+$brand-gray: #313131;
+
+$body-color: $brand-gray;
+
+$link-color: $brand-ink;
+$link-hover-color: $brand-ink-hover;
+
+// $btn-color: $brand-gray;
+
+// $font-family-sans-serif: 'Fredoka', system-ui, -apple-system, sans-serif;
+// $font-family-base: $font-family-sans-serif;
+$brand-font-primary: 'Fredoka', system-ui, -apple-system, sans-serif;
+
+$headings-font-family: $brand-font-primary;
+$display-font-family: $brand-font-primary;
+$input-btn-font-family: $brand-font-primary;
+
+$nav-link-font-size: 1.25rem;
+
+$enable-shadows: false;
+
+@import 'bootstrap/scss/bootstrap';
+
+// Outline buttons draw the brand colour as text and as a border, so they get the
+// darker shade too. The hover state fills with it and flips the text to white.
+.btn-outline-primary {
+  --bs-btn-color: #{$brand-ink};
+  --bs-btn-border-color: #{$brand-ink};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{$brand-ink};
+  --bs-btn-hover-border-color: #{$brand-ink};
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #{$brand-ink-hover};
+  --bs-btn-active-border-color: #{$brand-ink-hover};
+  --bs-btn-disabled-color: #{$brand-ink};
+  --bs-btn-disabled-border-color: #{$brand-ink};
+}
+
+.btn-primary {
+  --bs-btn-color: #{$brand-gray};
+  --bs-btn-hover-color: #{$brand-gray};
+  --bs-btn-active-color: #{$brand-gray};
+  --bs-btn-disabled-color: #{$brand-gray};
+}
+
+.text-brand {
+  color: $brand-ink;
+}
+
+.navbar-brand img {
+  max-height: 2rem;
+}
+
+.nav-link {
+  font-family: $brand-font-primary;
+}

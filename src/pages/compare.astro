@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PersonaHubHero from '../components/PersonaHubHero.astro';
+import WhoIsBigbyFor from '../components/WhoIsBigbyFor.astro';
+import TwoColumnIntro from '../components/TwoColumnIntro.astro';
+import LinkListGrid from '../components/LinkListGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import chessKnight from '../assets/images/piotr-makowski-27LH_0jXKYI-unsplash-983x1024.jpg';
+import tapeMeasure from '../assets/images/charlesdeluvio-jF89XBi6k_0-unsplash.jpg';
+
+const faqs = [
+  {
+    question: 'Why should I trust comparisons written by Bigby?',
+    answer:
+      'You should not trust them blindly, and we do not ask you to. Every claim on these pages is checkable: competitor pricing against their own sites, jurisdiction against company filings, scanning and AI policies against their published terms. We also concede real ground on every page, because the fastest way to lose a reader is to pretend Google is not cheaper or Dropbox does not sync better. Check anything that matters to you.',
+  },
+  {
+    question: 'Which comparison should I read first?',
+    answer:
+      'If you currently store files with Google, Dropbox or Microsoft, read the matching head-to-head page; it covers your actual switching decision, costs included. If you have already decided to leave Big Tech and are weighing the privacy-focused services against each other, start with the best private cloud storage UK roundup, which covers Proton Drive, Tresorit, Sync.com, pCloud and MEGA alongside Bigby.',
+  },
+  {
+    question: 'What is the short version of every comparison?',
+    answer:
+      'Bigby wins on jurisdiction and incentives: UK servers under UK law, no scanning, no AI training, and a subscription as the entire business model. Big Tech wins on price per gigabyte, mobile apps and ecosystem. The end-to-end encrypted services win if your threat model includes the provider itself, at some cost in usability. The right answer depends on which of those you rank first.',
+  },
+  {
+    question: 'How current is the pricing on these pages?',
+    answer:
+      "Competitor pricing was checked in June 2026 and each comparison page notes this. Providers change prices, free tiers and bundles regularly, so treat competitor figures as approximate and check their sites before deciding. Bigby's own pricing is always current at plans and pricing.",
+  },
+];
+---
+
+<Base
+  title="How Bigby Compares | Honest Storage Comparisons | Bigby"
+  description="Honest comparisons of Bigby with Google Drive, Dropbox, OneDrive and the privacy-focused alternatives, including where each one beats us."
+>
+  <Header />
+  <main>
+    <PersonaHubHero
+      image={chessKnight}
+      imageAlt="Chess knight standing between other pieces on a board"
+      heading="How Bigby compares"
+      paragraphs={[
+        'Honest comparisons with the storage you already use and the privacy services you are considering. We say plainly where the others win, because a comparison you cannot trust is just an advert.',
+        'Every page below concedes real trade-offs: price per gigabyte, mobile apps, ecosystems.',
+      ]}
+    />
+    <WhoIsBigbyFor
+      heading="Pick your comparison"
+      intro=""
+      links={[
+        { label: 'Bigby vs Google Drive', href: '/bigby-drive-vs-google-drive/' },
+        { label: 'Bigby vs Dropbox', href: '/bigby-drive-vs-dropbox/' },
+        { label: 'Bigby vs OneDrive', href: '/bigby-drive-vs-onedrive/' },
+        { label: 'UK alternative to Google Drive', href: '/uk-alternative-to-google-drive/' },
+        { label: 'Best private cloud storage UK', href: '/best-private-cloud-storage-uk/' },
+      ]}
+      footerHtml='Not comparing, just deciding? Go straight to <a href="/drive/#pricing">plans and pricing</a>.'
+    />
+    <TwoColumnIntro
+      heading="How we compare ourselves"
+      paragraphs={[
+        'Four questions run through every comparison on this site. Who can read your files? Whose law governs them? What does the business actually sell? And can you leave easily? On those questions Bigby holds its ground: files encrypted at rest on UK servers, never scanned and never used for AI training, governed by UK GDPR with no US parent company, funded entirely by subscriptions, and exportable over WebDAV whenever you choose. On price per gigabyte, mobile apps and ecosystem breadth, Big Tech wins and our pages say so. We would rather you pick Bigby for the right reasons than for inflated ones.',
+      ]}
+      image={tapeMeasure}
+      imageAlt="Tape measure coiled on a plain background"
+    />
+    <LinkListGrid
+      heading="Start from your question"
+      intro="Most people arrive at private storage from one of two directions: they want out of a Big Tech service they already use, or they are weighing the privacy-focused options against each other. Start from whichever is yours."
+      groups={[
+        {
+          heading: 'Leaving Big Tech',
+          links: [
+            { label: 'UK alternative to Google Drive', href: '/uk-alternative-to-google-drive/' },
+            { label: 'Bigby vs Google Drive', href: '/bigby-drive-vs-google-drive/' },
+            { label: 'Bigby vs Dropbox', href: '/bigby-drive-vs-dropbox/' },
+            { label: 'Bigby vs OneDrive', href: '/bigby-drive-vs-onedrive/' },
+          ],
+        },
+        {
+          heading: 'Choosing private storage',
+          links: [
+            { label: 'Best private cloud storage UK', href: '/best-private-cloud-storage-uk/' },
+            { label: 'Why privacy needs a business model', href: '/for-privacy/' },
+            { label: 'UK data residency explained', href: '/for-uk-data-residency/' },
+            { label: 'Bigby.drive plans and pricing', href: '/drive/' },
+          ],
+        },
+      ]}
+    />
+    <FaqAccordion faqs={faqs} idPrefix="compare-faq" />
+    <ClosingCta
+      heading="Compared, conceded, decided?"
+      subhead="Encrypted UK cloud storage from £3.99 per month. UK servers, UK law, no scanning, no AI training."
+    />
+  </main>
+  <Footer />
+</Base>

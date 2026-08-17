@@ -1,0 +1,166 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PricingTable from '../components/PricingTable.astro';
+import JsonLd from '../components/JsonLd.astro';
+import lockers from '../assets/images/laura-rivera-nT9cQNZ67qI-unsplash.jpg';
+import calculator from '../assets/images/jakub-zerdzicki-LgE3whpa5VA-unsplash.jpg';
+import ringBinders from '../assets/images/augustin-foto-jonas-augustin-MTqaqBY6lfA-unsplash.jpg';
+import viaduct from '../assets/images/joe-cleary-sIcAcPOgpMU-unsplash.jpg';
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://bigby.cloud/drive/#product',
+  name: 'Bigby.drive',
+  brand: { '@id': 'https://bigby.cloud/#organization' },
+  description:
+    'Private, encrypted cloud storage built and run in the UK. Files are encrypted at rest on UK servers, with no scanning, no AI training and no data harvesting. WebDAV supported, available on web and desktop.',
+  url: 'https://bigby.cloud/drive/',
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'GBP',
+    lowPrice: '3.99',
+    highPrice: '12.99',
+    offerCount: '9',
+    url: 'https://bigby.cloud/drive/#pricing',
+  },
+};
+
+const features = [
+  {
+    image: lockers,
+    imageAlt: 'Row of metal storage lockers with one orange door',
+    heading: 'Private Cloud File Storage',
+    body: "Fast, secure, and flexible. Bigby.drive is perfect for day-to-day file management and backups. Built on open standards, with your files encrypted at rest on UK servers. Works in your browser and on your desktop.",
+  },
+  {
+    image: calculator,
+    imageAlt: 'Phone calculator and printed bar charts next to a laptop',
+    heading: 'Office Suite',
+    body: "Whether it's editing straight in your browser (based on the epic Collabora project), or on your desktop with open source favourites like OpenOffice, working on your documents, spreadsheets, and presentations is as easy as ever.",
+  },
+  {
+    image: ringBinders,
+    imageAlt: 'Colourful ring binders lined up on a shelf',
+    heading: 'Collaboration Tools',
+    body: 'Spaces for shared folders, individual access control, and real-time collaborative editing. No need to sacrifice productivity for privacy.',
+  },
+  {
+    image: viaduct,
+    imageAlt: 'Train crossing a viaduct in central Manchester',
+    heading: 'Works Everywhere',
+    body: 'Sync folders to your desktop, open files on your phone, practice presentations on your smart fridge (well, maybe one day). Bigby.drive is built on the open WebDAV standard, meaning it integrates with the tools you probably already have. Starting from scratch? Our desktop apps will get you up and running fast.',
+  },
+];
+---
+
+<Base
+  title="Bigby.drive | Encrypted UK Cloud Storage from £3.99/month"
+  description="Encrypted UK cloud storage with WebDAV support and honest pricing. 100GB from £3.99 per month, with optional docs and collaboration tools."
+>
+  <Header />
+  <main>
+    <section class="bg-dark text-white text-center py-5">
+      <div class="container">
+        <h1 class="display-5">Encrypted Cloud Storage &amp; Office<br /><strong>born and built in the UK</strong></h1>
+        <p class="fs-5">For individuals, families, and organisations.</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a class="btn btn-primary btn-lg" href="/waiting-list/">Join the Waiting List</a>
+          <a class="btn btn-outline-light btn-lg" href="https://drive.bigby.cloud/oauth2/sign_in?rd=/" target="_blank" rel="noreferrer noopener">
+            Login to Bigby.drive
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5" id="pricing">
+      <div class="container">
+        <h2 class="text-center">Annual pricing</h2>
+        <p class="text-center text-body-secondary fs-5 mb-4">Monthly billing coming soon.</p>
+        <PricingTable />
+      </div>
+    </section>
+
+    <section class="py-5">
+      <div class="container">
+        <h2>Who is Bigby.drive for?</h2>
+        <p class="fs-5 col-lg-8 text-body-secondary">
+          Whether you are protecting client files, safeguarding family memories, or simply want your data to stay in
+          the UK and out of Big Tech hands, Bigby.drive is built for you.
+        </p>
+        <div class="row g-4 mt-2">
+          <div class="col-md-6">
+            <div class="card text-bg-dark h-100">
+              <div class="card-body">
+                <h3 class="card-title">For professionals</h3>
+                <p class="card-text text-white-50">
+                  Solicitors, accountants, therapists, journalists, and creative professionals. If your work involves
+                  sensitive client data, confidential records, or creative work you need to protect, Bigby.drive is
+                  built around your obligations and your rights.
+                </p>
+                <a class="btn btn-primary" href="/for-professionals/">See professional use cases</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card text-bg-dark h-100">
+              <div class="card-body">
+                <h3 class="card-title">For personal use</h3>
+                <p class="card-text text-white-50">
+                  Families, content creators, expats, privacy-conscious individuals, and anyone who simply wants their
+                  files to stay in the UK. If you are tired of your personal data funding someone else's business
+                  model, there is a better way.
+                </p>
+                <a class="btn btn-primary" href="/for-personal/">See personal use cases</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4">
+          Wondering how Bigby stacks up against what you use now? Read our <a href="/compare/">honest comparisons</a>
+          with <a href="/bigby-drive-vs-google-drive/">Google Drive</a>, <a href="/bigby-drive-vs-dropbox/">Dropbox</a>,
+          and <a href="/bigby-drive-vs-onedrive/">OneDrive</a>, including where they beat us.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-5 bg-body-tertiary">
+      <div class="container">
+        <h2 class="mb-4">All the features you need (and none that you don't)</h2>
+        <div class="row g-4">
+          {
+            features.map((feature) => (
+              <div class="col-md-6 col-lg-3">
+                <div class="ratio ratio-4x3 rounded overflow-hidden mb-3">
+                  <Image
+                    src={feature.image}
+                    alt={feature.imageAlt}
+                    loading="lazy"
+                    width={600}
+                    style="object-fit: cover; width: 100%; height: 100%;"
+                  />
+                </div>
+                <h3 class="h5">{feature.heading}</h3>
+                <p>{feature.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 text-center">
+      <div class="container">
+        <h2>On-Prem</h2>
+        <p class="fs-5 mb-1">Interested in hosting your own in-house cloud storage and office suite?</p>
+        <p class="fs-5">Our consultancy service can work with you to make it happen.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:support@bigby.cloud">Get in touch</a>
+      </div>
+    </section>
+    <JsonLd data={productSchema} />
+  </main>
+  <Footer />
+</Base>

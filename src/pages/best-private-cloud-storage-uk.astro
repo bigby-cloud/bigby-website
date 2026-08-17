@@ -1,0 +1,153 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ComparisonHero from '../components/ComparisonHero.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import countryside from '../assets/images/guiville-w5H7FE3r4Nc-unsplash-1024x768.jpg';
+
+const shortlist = [
+  {
+    heading: 'Bigby: best for UK data residency',
+    body: 'Our product, so apply scepticism, but here is the factual case. Bigby is the only service on this list that is UK-owned, UK-run and stores data exclusively on UK servers under UK GDPR, with no US parent company and no CLOUD Act exposure. Files are encrypted at rest, never scanned, and never used for AI training. The business is funded entirely by subscriptions, from £3.99 per user per month for 100GB, with Collabora document editing on the Office plans and WebDAV export so you are never locked in. The honest weaknesses: no end-to-end encryption, no mobile apps yet, no free tier, and a higher price per gigabyte than Big Tech. If UK jurisdiction is your first requirement, this is the option built specifically for it.',
+  },
+  {
+    heading: 'Proton Drive: best end-to-end encrypted all-rounder',
+    body: 'From the Swiss team behind Proton Mail. Everything is end-to-end encrypted by default, so Proton technically cannot read your files, which is a stronger guarantee than Bigby offers. Good apps across platforms, a free tier to try, and a credible track record on privacy. The trade-offs: Swiss rather than UK jurisdiction, E2EE limits like restricted search and previews, and the best value comes from buying the whole Proton bundle rather than storage alone. If E2EE matters more to you than UK residency, start here.',
+  },
+  {
+    heading: 'Tresorit: best for businesses that need E2EE and compliance',
+    body: 'Swiss, end-to-end encrypted, and aimed squarely at businesses with compliance requirements: granular permissions, audit trails, admin controls. It is the most enterprise-ready service here and the most expensive, with pricing well above consumer services. For a regulated firm that needs E2EE with paperwork to match, Tresorit is the serious answer. For individuals it is usually more product, and more money, than the job needs.',
+  },
+  {
+    heading: 'Sync.com: best value end-to-end encryption',
+    body: 'Canadian, end-to-end encrypted by default, and aggressively priced, with terabytes of E2EE storage for less than most rivals charge. Apps are functional rather than slick and the service has fewer collaboration features than the big platforms, but as pure private storage per pound it is hard to argue with. Canadian jurisdiction is the consideration for UK users: better than US, but not UK law.',
+  },
+  {
+    heading: 'pCloud: best for lifetime plans',
+    body: 'Swiss company with a distinctive offer: pay once, keep the storage for life, which works out cheap if you stay for years. Polished apps and good media playback. The privacy caveat is significant though: end-to-end encryption is a paid add-on called pCloud Encryption rather than the default, and without it pCloud manages your keys like any mainstream provider. Buy it for the lifetime economics, not as a privacy-first choice unless you pay for the add-on.',
+  },
+  {
+    heading: 'MEGA: best free tier with E2EE',
+    body: "New Zealand based, end-to-end encrypted, and generous: around 20GB free, which is the largest E2EE free tier going. Paid plans are competitively priced. The company's colourful corporate history puts some people off, and its jurisdiction is a long way from the UK in every sense, but the current product is capable and the cryptography is published. A reasonable way to try E2EE storage without spending anything.",
+  },
+];
+
+const atAGlance = [
+  { service: 'Bigby', jurisdiction: 'UK', encryption: 'At rest, no scanning, no AI training', bestFor: 'UK data residency, UK law' },
+  { service: 'Proton Drive', jurisdiction: 'Switzerland', encryption: 'End-to-end by default', bestFor: 'E2EE all-rounder' },
+  { service: 'Tresorit', jurisdiction: 'Switzerland', encryption: 'End-to-end by default', bestFor: 'Business compliance' },
+  { service: 'Sync.com', jurisdiction: 'Canada', encryption: 'End-to-end by default', bestFor: 'E2EE on a budget' },
+  { service: 'pCloud', jurisdiction: 'Switzerland', encryption: 'At rest; E2EE as paid add-on', bestFor: 'Lifetime plans' },
+  { service: 'MEGA', jurisdiction: 'New Zealand', encryption: 'End-to-end by default', bestFor: 'Free E2EE tier' },
+];
+
+const faqs = [
+  {
+    question: 'Why is no other service on this list actually British?',
+    answer:
+      'Because the privacy storage market grew up around Swiss and other non-US jurisdictions, and the UK never developed an equivalent at consumer prices. That gap is the reason Bigby exists. If you find another genuinely UK-owned, UK-hosted private storage service worth including here, tell us and we will add it. We mean that.',
+  },
+  {
+    question: 'Should I just pick whichever has end-to-end encryption?',
+    answer:
+      'Not automatically. E2EE is the strongest technical guarantee, and if your threat model includes the provider itself, choose it. But E2EE costs you usable search, previews, browser document editing and easy sharing, and it does not change which country\'s courts govern your data. Many people\'s actual requirement is "my files in my country, with a provider that has no reason to look", which jurisdiction and business model answer better than cryptography does.',
+  },
+  {
+    question: 'Why are Google Drive, Dropbox and OneDrive not on this list?',
+    answer:
+      'Because this is a list of private storage, and all three are US companies that hold your keys, scan content against their policies and are building AI features that process what you store. They are capable products, often cheaper per gigabyte than anything here, and we compare ourselves to them honestly on their own pages: see Bigby vs Google Drive, Bigby vs Dropbox and Bigby vs OneDrive. They are just answering a different question.',
+  },
+  {
+    question: 'How should I actually decide?',
+    answer:
+      'Rank your requirements before you shop. If UK jurisdiction comes first, Bigby is the purpose-built option. If the provider must be technically unable to read your files, choose Proton Drive, Sync.com or Tresorit depending on budget and whether you are a business. If you want to pay once and forget it, pCloud. If you want to try E2EE for free, MEGA. Every service here will sell you a story; the requirements list keeps you honest.',
+  },
+];
+---
+
+<Base
+  title="Best Private Cloud Storage UK: Honest Roundup | Bigby"
+  description="Honest roundup of private cloud storage for UK users, competitors included: Proton Drive, Tresorit, Sync.com, pCloud, MEGA and Bigby compared."
+>
+  <Header />
+  <main>
+    <ComparisonHero
+      image={countryside}
+      imageAlt="Rolling English countryside under a wide evening sky"
+      heading="The best private cloud storage for UK users, honestly compared"
+      subhead="We make Bigby, so you should read this roundup knowing that. We have still included the strongest privacy-focused competitors and said plainly what each does better than us, because a recommendation you cannot trust is worth nothing."
+    />
+
+    <section class="py-5 bg-body-tertiary">
+      <div class="container">
+        <h2>How we judged</h2>
+        <p class="fs-5 col-lg-8 text-body-secondary">
+          Four questions matter for private storage. Who can read your files? Whose law governs them? What does the
+          business sell? And can you leave easily? Price and polish come after those, not before.
+        </p>
+        <p class="col-lg-8">
+          One distinction worth understanding before the list: end-to-end encryption (E2EE) means the provider
+          technically cannot read your files, because only you hold the keys. Encryption at rest means files are
+          stored encrypted but the provider manages the keys, and your protection rests on their policies and the
+          law they operate under. E2EE is the stronger technical guarantee. It usually costs you search, previews,
+          easy sharing and document editing, which is why several capable services, Bigby included, take the
+          at-rest approach instead. Neither is dishonest; they are different trades, and the list below says which
+          each provider makes.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-5" id="roundup">
+      <div class="container">
+        <h2 class="mb-4">The shortlist</h2>
+        {
+          shortlist.map((item) => (
+            <div class="border-top py-3">
+              <h3 class="h5">{item.heading}</h3>
+              <p>{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-5 bg-body-tertiary">
+      <div class="container">
+        <h2 class="mb-4">At a glance</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered bg-body align-middle">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Jurisdiction</th>
+                <th>Encryption</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                atAGlance.map((row) => (
+                  <tr>
+                    <th scope="row">{row.service}</th>
+                    <td>{row.jurisdiction}</td>
+                    <td>{row.encryption}</td>
+                    <td>{row.bestFor}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <FaqAccordion faqs={faqs} idPrefix="roundup-faq" />
+    <ClosingCta
+      heading="If the UK is your answer, we are your option"
+      subhead="Encrypted UK cloud storage from £3.99 per month. UK servers, UK law, no scanning, no AI training."
+    />
+  </main>
+  <Footer />
+</Base>

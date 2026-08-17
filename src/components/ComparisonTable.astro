@@ -1,0 +1,45 @@
+---
+interface Row {
+  label: string;
+  bigby: string;
+  competitor: string;
+}
+
+interface Props {
+  heading: string;
+  subhead: string;
+  competitorName: string;
+  rows: Row[];
+}
+
+const { heading, subhead, competitorName, rows } = Astro.props;
+---
+
+<section class="py-5 bg-body-tertiary" id="comparison">
+  <div class="container">
+    <h2>{heading}</h2>
+    <p class="fs-5 col-lg-8 text-body-secondary">{subhead}</p>
+    <div class="table-responsive mt-4">
+      <table class="table table-bordered bg-body align-middle">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Bigby</th>
+            <th>{competitorName}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.bigby}</td>
+                <td>{row.competitor}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

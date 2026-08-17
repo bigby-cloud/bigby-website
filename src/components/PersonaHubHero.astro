@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  imageAlt: string;
+  heading: string;
+  paragraphs: string[];
+}
+
+const { image, imageAlt, heading, paragraphs } = Astro.props;
+---
+
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <Image src={image} alt={imageAlt} class="img-fluid rounded" loading="lazy" width={800} />
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5">{heading}</h1>
+        {paragraphs.map((p, i) => <p class={i === 0 ? 'fs-5' : ''}>{p}</p>)}
+      </div>
+    </div>
+  </div>
+</section>

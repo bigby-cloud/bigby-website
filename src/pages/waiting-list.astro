@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const thanksUrl = new URL('/waiting-list/thanks/', Astro.site);
+---
+
+<Base
+  title="Join the Waiting List | Bigby.cloud"
+  description="Bigby.drive is launching soon. Join the waiting list for private, encrypted UK cloud storage and be first to know when plans go live."
+>
+  <Header />
+  <main>
+    <section class="py-5 text-center">
+      <div class="container">
+        <h1>Join the waiting list to be the first in line to Bigby.drive</h1>
+      </div>
+    </section>
+    <section class="py-3">
+      <div class="container" style="max-width: 560px;">
+        <h2 class="text-center h4 mb-4">Fill in the below and we'll be in touch shortly!</h2>
+        <form action="https://formspree.io/f/maewopek" method="POST">
+          <input type="hidden" name="_next" value={thanksUrl} />
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label for="firstname" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstname" name="firstname" required />
+            </div>
+            <div class="col-sm-6">
+              <label for="lastname" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastname" name="lastname" required />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Join</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

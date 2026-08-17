@@ -1,0 +1,8 @@
+---
+import { getEntry } from 'astro:content';
+import PersonaTemplate from '../layouts/PersonaTemplate.astro';
+
+const entry = await getEntry('personas', 'privacy');
+---
+
+<PersonaTemplate title='Private Cloud Storage Without Data Harvesting | Bigby' description='You know free cloud storage is paid for with your data. Bigby is the alternative: encrypted, UK based, subscription funded, no data harvesting.' persona={entry.data} />

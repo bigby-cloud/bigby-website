@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Base
+  title="Thanks for letting us know | Bigby.cloud"
+  description="Thanks for reporting an issue with Bigby.cloud."
+  noindex={true}
+>
+  <Header />
+  <main>
+    <section class="py-5 text-center">
+      <div class="container" style="max-width: 560px;">
+        <h1>Thanks for letting us know</h1>
+        <p class="fs-5 text-body-secondary">We've got your report and will look into it.</p>
+        <a class="btn btn-primary btn-lg mt-3" href="/">Back to Bigby.cloud</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

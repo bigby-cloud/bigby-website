@@ -1,0 +1,32 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  heading: string;
+  intro: string;
+  links: Link[];
+  footerHtml: string;
+}
+
+const { heading, intro, links, footerHtml } = Astro.props;
+---
+
+<section class="py-5 bg-body-tertiary text-center">
+  <div class="container">
+    <h2>{heading}</h2>
+    {intro && <p class="fs-5 col-lg-8 mx-auto text-body-secondary">{intro}</p>}
+    <div class="d-flex flex-wrap justify-content-center gap-2 my-4">
+      {
+        links.map((link) => (
+          <a class="btn btn-outline-primary" href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <p class="text-body-secondary" set:html={footerHtml} />
+  </div>
+</section>

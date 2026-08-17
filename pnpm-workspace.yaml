@@ -1,0 +1,15 @@
+# Delay installation of newly published packages by 7 days to reduce supply chain attack risk.
+# https://pnpm.io/settings/dependency-resolution#minimumreleaseage
+minimumReleaseAge: 10080
+# Fail loudly rather than auto-bypassing the age gate for recently published direct deps.
+minimumReleaseAgeStrict: true
+
+# Direct dependencies excluded from the age gate — added here intentionally when upgrading.
+# minimumReleaseAgeExclude:
+#   - astro
+
+# Explicitly allow build scripts for known native binaries required by Astro.
+# https://pnpm.io/settings/build#allowbuilds
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true

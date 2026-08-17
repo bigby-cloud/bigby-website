@@ -1,0 +1,132 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PersonaHero from '../components/PersonaHero.astro';
+import TwoColumnIntro from '../components/TwoColumnIntro.astro';
+import CardGrid from '../components/CardGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import unionJack from '../assets/images/maxim-hopman-VweMmg8XMfw-unsplash-1024x683.jpg';
+import wayOutSign from '../assets/images/ilya-osROv_utGf4-unsplash.jpg';
+
+const faqs = [
+  {
+    question: 'Is Bigby a direct replacement for Google Drive?',
+    answer:
+      'For storage, file sharing and everyday documents, yes. The Office plans include Collabora docs, spreadsheets and presentations, which cover most of what people use Google Docs for. What Bigby does not replace is the wider Google ecosystem: Gmail, Photos with face search, and the long tail of third-party integrations. Most people who switch keep a Google account for those and move their files to Bigby.',
+  },
+  {
+    question: 'Why does Bigby cost more per gigabyte than Google?',
+    answer:
+      'Because the storage fee is our only income. Google can price storage below cost since stored data strengthens an advertising business worth hundreds of billions. Bigby has no advertising, no data sales and no AI training pipeline, so the subscription has to carry the whole service. You are paying the real price of private storage instead of paying with your data.',
+  },
+  {
+    question: 'Can Google still see my files if I only use Bigby?',
+    answer:
+      "Files stored on Bigby are encrypted at rest on UK servers and are never sent to Google or any other third party. Bear in mind that if you share a Bigby file with someone who saves it to their own Google Drive, that copy is back under Google's terms. Privacy is about where the data lives, and on Bigby it lives in the UK under UK law.",
+  },
+  {
+    question: 'What happens to my Google Docs formatting when I move?',
+    answer:
+      'Google Takeout exports Docs, Sheets and Slides to open formats such as .docx and .xlsx, which Collabora opens and edits directly. Simple documents come across cleanly. Heavily formatted files may need minor tidying, the same as moving between any two office suites. Plain files such as photos, PDFs and video transfer exactly as they are.',
+  },
+];
+---
+
+<Base
+  title="UK Alternative to Google Drive | Private, Encrypted | Bigby"
+  description="Looking for a UK alternative to Google Drive? Bigby stores files encrypted on UK servers under UK law. No scanning, no AI training, from £3.99."
+>
+  <Header />
+  <main>
+    <PersonaHero
+      image={unionJack}
+      imageAlt="Union Jack flying on a flagpole"
+      heading="The UK alternative to Google Drive"
+      subhead="Bigby is private, encrypted cloud storage built and run in the UK. Your files stay on UK servers, under UK law, with a company that has no advertising business and no AI training pipeline. If you are looking for a way out of Google Drive that does not mean trusting another American giant, this is it."
+      anchorId="switching"
+      anchorLabel="How switching works"
+    />
+    <TwoColumnIntro
+      heading="Why people leave Google Drive"
+      paragraphs={[
+        'Google Drive is a capable product attached to an advertising company. Google can access the contents of what you store, scans files against its policies, and is folding Gemini AI features ever deeper into Drive and Workspace. As a US company, it is also subject to the CLOUD Act, which means data held by Google can be reached by US authorities even when it sits on a European server.',
+        'None of that makes Google Drive a bad product. It makes it the wrong product for people who want their files held privately, in the UK, by a company whose only revenue is the storage fee. That is the gap Bigby exists to fill.',
+      ]}
+      image={wayOutSign}
+      imageAlt="Two travellers with a suitcase heading for a station exit under a Way out sign"
+    />
+    <CardGrid
+      heading="What you get instead"
+      subhead="Bigby is not a Google clone. It is a smaller, more private product with a different set of trade-offs. Here is what changes when you switch."
+      items={[
+        {
+          heading: 'UK servers, UK law',
+          body: 'Your files are stored encrypted on UK infrastructure, run by a UK company, under UK GDPR. There is no US parent and no CLOUD Act exposure. Jurisdiction is not a footnote here. It is the product.',
+        },
+        {
+          heading: 'No scanning, no AI training',
+          body: 'Bigby does not open, scan or read the contents of what you store, and stored content is never used for AI training or advertising. We are funded by subscriptions, so there is no business reason to look.',
+        },
+        {
+          heading: 'Docs without the harvesting',
+          body: 'The Office plans include Collabora documents, spreadsheets and presentations, so you can replace Google Docs and Sheets for everyday work, edited in the browser and stored on the same private UK servers.',
+        },
+        {
+          heading: 'No lock-in',
+          body: 'WebDAV is supported, so your files can always be exported with standard tools. No export fees, no proprietary formats holding your data hostage. Leaving Bigby is as easy as joining, which is how it should be.',
+        },
+      ]}
+    />
+    <CardGrid
+      bgClass="bg-body-tertiary"
+      heading="The honest trade-offs"
+      subhead="Google does some things better than we do, and pretending otherwise would insult your intelligence. Weigh these before you switch."
+      items={[
+        {
+          heading: 'Google is cheaper per gigabyte',
+          body: "Google One offers 2TB for around £7.99 per month. Bigby's 1TB Storage plan is £9.99 per user per month. Google subsidises storage because your data has value to the rest of its business. We charge what private storage actually costs to run.",
+        },
+        {
+          heading: 'No mobile apps yet',
+          body: "Bigby is available on web and desktop. Google's mobile apps are excellent and we do not currently match them. If editing files from your phone is central to how you work, factor that in.",
+        },
+        {
+          heading: 'No free tier',
+          body: 'Google gives you 15GB free. Bigby has no free tier, because free tiers are paid for somehow, and we would rather be plain about the cost. Plans start at £3.99 per user per month for 100GB, billed annually.',
+        },
+        {
+          heading: 'A smaller ecosystem',
+          body: 'Gmail, Photos, Calendar and thousands of third-party integrations hang off Google Drive. Bigby is storage and documents, done privately. If you need the full ecosystem, you will keep some Google services alongside.',
+        },
+      ]}
+    />
+    <CardGrid
+      anchorId="switching"
+      heading="How switching works"
+      subhead="Moving off Google Drive takes an afternoon, not a weekend."
+      items={[
+        {
+          heading: '01. Export from Google',
+          body: 'Use Google Takeout to download your Drive contents, or drag folders out of the Drive desktop client. Google Docs export to standard formats that Collabora opens directly.',
+        },
+        {
+          heading: '02. Upload to Bigby',
+          body: 'Drag your folders into the web interface, use the desktop client to sync them, or connect over WebDAV and copy everything in one move with the tools you already know.',
+        },
+        {
+          heading: '03. Wind Google down',
+          body: 'Keep your Google account for whatever you still need it for, and empty the Drive. From that point on, what you store has left the advertising economy.',
+        },
+      ]}
+      colClass="col-lg-4"
+    />
+    <FaqAccordion faqs={faqs} idPrefix="uk-alt-faq" />
+    <ClosingCta
+      heading="Your files, back in the UK"
+      subhead="Encrypted UK cloud storage from £3.99 per month. No scanning, no AI training, no advertising business behind the curtain."
+    />
+  </main>
+  <Footer />
+</Base>

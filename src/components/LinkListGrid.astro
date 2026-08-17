@@ -1,0 +1,71 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Group {
+  heading: string;
+  links: Link[];
+}
+
+interface Props {
+  heading: string;
+  intro?: string;
+  groups: Group[];
+  layout?: 'split' | 'full';
+  colClass?: string;
+}
+
+const { heading, intro, groups, layout = 'split', colClass = 'col-sm-6' } = Astro.props;
+---
+
+<section class="py-5">
+  <div class="container">
+    {
+      layout === 'split' ? (
+        <div class="row g-5 align-items-start">
+          <div class="col-lg-6">
+            <h2>{heading}</h2>
+            {intro && <p class="fs-5">{intro}</p>}
+          </div>
+          <div class="col-lg-6">
+            <div class="row g-4">
+              {groups.map((group) => (
+                <div class={colClass}>
+                  <h3 class="h5">{group.heading}</h3>
+                  <ul class="list-unstyled">
+                    {group.links.map((link) => (
+                      <li class="mb-2">
+                        <a href={link.href}>{link.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Fragment>
+          <h2>{heading}</h2>
+          {intro && <p class="fs-5 col-lg-8">{intro}</p>}
+          <div class="row g-4 mt-2">
+            {groups.map((group) => (
+              <div class={colClass}>
+                <h3 class="h5">{group.heading}</h3>
+                <ul class="list-unstyled">
+                  {group.links.map((link) => (
+                    <li class="mb-2">
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Fragment>
+      )
+    }
+  </div>
+</section>

@@ -1,0 +1,8 @@
+---
+import { getEntry } from 'astro:content';
+import PersonaTemplate from '../layouts/PersonaTemplate.astro';
+
+const entry = await getEntry('personas', 'accountants');
+---
+
+<PersonaTemplate title='Secure Cloud Storage for Accountants | UK Based | Bigby' description='Keep client financial records on encrypted UK servers under UK law. Private cloud storage for accountants and bookkeepers, from £3.99 per month.' persona={entry.data} />

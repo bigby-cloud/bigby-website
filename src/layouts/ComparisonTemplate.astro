@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ComparisonHero from '../components/ComparisonHero.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import CardGrid from '../components/CardGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  comparison: CollectionEntry<'comparisons'>['data'];
+}
+
+const { title, description, comparison } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main>
+    <ComparisonHero
+      image={comparison.heroImage}
+      imageAlt={comparison.heroImageAlt}
+      heading={comparison.heroHeading}
+      subhead={comparison.heroSubhead}
+    />
+    <ComparisonTable
+      heading={comparison.tableHeading}
+      subhead={comparison.tableSubhead}
+      competitorName={comparison.competitorName}
+      rows={comparison.rows}
+    />
+    <CardGrid
+      heading={comparison.chooseCompetitorHeading}
+      items={comparison.chooseCompetitorItems}
+      colClass="col-lg-4"
+    />
+    <CardGrid
+      heading={comparison.chooseBigbyHeading}
+      items={comparison.chooseBigbyItems}
+      colClass="col-lg-4"
+      bgClass="bg-body-tertiary"
+    />
+    <FaqAccordion faqs={comparison.faqs} idPrefix="comparison-faq" />
+    <ClosingCta heading={comparison.closingHeading} subhead={comparison.closingSubhead} />
+  </main>
+  <Footer />
+</Base>

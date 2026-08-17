@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PersonaHubHero from '../components/PersonaHubHero.astro';
+import WhoIsBigbyFor from '../components/WhoIsBigbyFor.astro';
+import TwoColumnIntro from '../components/TwoColumnIntro.astro';
+import CardGrid from '../components/CardGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  hub: CollectionEntry<'persona-hubs'>['data'];
+}
+
+const { title, description, hub } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main>
+    <PersonaHubHero
+      image={hub.heroImage}
+      imageAlt={hub.heroImageAlt}
+      heading={hub.heroHeading}
+      paragraphs={hub.heroParagraphs}
+    />
+    <WhoIsBigbyFor heading={hub.whoHeading} intro={hub.whoIntro} links={hub.whoLinks} footerHtml={hub.whoFooterHtml} />
+    <TwoColumnIntro
+      heading={hub.whyHeading}
+      paragraphs={hub.whyParagraphs}
+      image={hub.whyImage}
+      imageAlt={hub.whyImageAlt}
+    />
+    <CardGrid heading={hub.includesHeading} subhead={hub.includesSubhead} items={hub.includesItems} />
+    <FaqAccordion faqs={hub.faqs} idPrefix="hub-faq" />
+    <ClosingCta heading={hub.closingHeading} subhead={hub.closingSubhead} />
+  </main>
+  <Footer />
+</Base>

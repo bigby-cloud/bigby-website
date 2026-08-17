@@ -1,0 +1,77 @@
+---
+import { getImage } from 'astro:assets';
+import '../styles/custom.scss';
+import JsonLd from '../components/JsonLd.astro';
+import defaultOgImageSrc from '../assets/images/heather-wang-UrgsGl7iBsk-unsplash-1.jpg';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, ogImage, noindex = false } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const optimizedDefaultOg = await getImage({ src: defaultOgImageSrc, width: 1200, format: 'jpg' });
+const defaultOgImage = new URL(optimizedDefaultOg.src, Astro.site);
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://bigby.cloud/#organization',
+  name: 'Bigby.cloud',
+  alternateName: 'Bigby',
+  url: 'https://bigby.cloud/',
+  description: 'Private, encrypted cloud storage built and run in the UK. No data harvesting, no AI training on your files. Plans from £3.99 per month.',
+  foundingLocation: { '@type': 'Country', name: 'United Kingdom' },
+  address: { '@type': 'PostalAddress', addressCountry: 'GB' },
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://bigby.cloud/logo-white-cropped-01.jpeg',
+    width: 551,
+    height: 126
+  },
+  'sameAs': [
+    'https://www.linkedin.com/company/bigby-cloud',
+    'https://github.com/bigby-cloud'
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bigby.cloud" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage ?? defaultOgImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <JsonLd data={organizationSchema} />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+    </script>
+  </body>
+</html>

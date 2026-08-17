@@ -1,0 +1,150 @@
+---
+// Prices per storage tier: [100GB, 500GB, 1TB], annual billing, per user/month.
+const tiers = [
+  { label: '100 GB', office: '£5.99', files: '£3.99', groups: '£4.99', badge: 'From £3.99' },
+  { label: '500 GB', office: '£9.99', files: '£6.99', groups: '£7.99', badge: null },
+  { label: '1 TB', office: '£12.99', files: '£9.99', groups: '£11.99', badge: null },
+];
+---
+
+<div id="bgb-pricing">
+  <div class="mb-4">
+    <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
+    <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
+      {
+        tiers.map((tier, i) => (
+          <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
+            <span
+              class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !tier.badge }]}
+              style="font-size: 0.75rem; padding-block: 0.4em;"
+            >
+              {tier.badge ?? 'placeholder'}
+            </span>
+            <button
+              type="button"
+              class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === 1 ? 'btn-primary' : 'btn-outline-dark']}
+              data-tier={i}
+              aria-pressed={i === 1 ? 'true' : 'false'}
+            >
+              {tier.label}
+            </button>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card text-bg-dark h-100 p-2">
+        <div class="card-body d-flex flex-column">
+          <span class="badge text-bg-primary align-self-start mb-2">★ Our best all-rounder</span>
+          <h3 class="card-title">Office</h3>
+          <p class="card-subtitle text-white-50 mb-3">Files and productivity, together.</p>
+          <div class="row mb-4">
+            <div class="col-6">
+              <div class="text-uppercase small text-white-50 mb-2">Standard features</div>
+              <ul class="list-unstyled small">
+                <li>✓ Online file storage</li>
+                <li>✓ Shared spaces</li>
+                <li>✓ Share with anyone on Bigby.drive</li>
+                <li>✓ Encryption at rest</li>
+                <li>✓ WebDAV</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <div class="text-uppercase small text-white-50 mb-2">Office + collaboration</div>
+              <ul class="list-unstyled small">
+                <li>✓ Documents</li>
+                <li>✓ Spreadsheets</li>
+                <li>✓ Presentations</li>
+                <li>✓ Graphics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-auto d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
+            <div>
+              <div class="small text-white-50" data-field="office-size">500 GB per person</div>
+              <div><span class="fs-3" data-field="office-price">£9.99</span><span class="text-white-50">/month</span></div>
+              <div class="small text-white-50">Annual price, billed yearly.</div>
+            </div>
+            <a class="btn btn-light" href="/waiting-list/">Join the waiting list</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card mb-4">
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title">Just Files</h3>
+          <p class="card-subtitle text-body-secondary mb-3">Everything you need, nothing you don't.</p>
+          <ul class="list-unstyled small text-body-secondary">
+            <li>✓ Online file storage</li>
+            <li>✓ Shared spaces</li>
+            <li>✓ Share with anyone on Bigby.drive</li>
+          </ul>
+          <hr />
+          <div class="mt-auto">
+            <div class="small text-body-secondary" data-field="files-size">500 GB per person</div>
+            <div><span class="fs-4" data-field="files-price">£6.99</span><span class="text-body-secondary">/month</span></div>
+            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body d-flex flex-column">
+          <span class="badge text-bg-light border align-self-start mb-2">Min 3 &middot; Billed together</span>
+          <h3 class="card-title">Groups &amp; Business</h3>
+          <p class="card-subtitle text-body-secondary mb-3">Everything in Office, plus group discounts.</p>
+          <ul class="list-unstyled small text-body-secondary">
+            <li>✓ Discount for groups of 3+</li>
+            <li>✓ Shared billing &amp; admin</li>
+            <li>✓ All Office features included</li>
+          </ul>
+          <hr />
+          <div class="mt-auto">
+            <div class="small text-body-secondary" data-field="groups-size">500 GB per person</div>
+            <div><span class="fs-4" data-field="groups-price">£7.99</span><span class="text-body-secondary">/user/mo</span></div>
+            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-light border mt-4">
+    <strong>Need more room?</strong> Add 100 GB per person for <strong>£1.49/month</strong>. Available on any plan, no
+    tier change needed.
+  </div>
+</div>
+
+<script define:vars={{ tiers }}>
+  const buttons = document.querySelectorAll('.bgb-tier-btn');
+  const fields = {
+    office: { size: document.querySelector('[data-field="office-size"]'), price: document.querySelector('[data-field="office-price"]') },
+    files: { size: document.querySelector('[data-field="files-size"]'), price: document.querySelector('[data-field="files-price"]') },
+    groups: { size: document.querySelector('[data-field="groups-size"]'), price: document.querySelector('[data-field="groups-price"]') },
+  };
+
+  function setTier(index) {
+    const tier = tiers[index];
+    buttons.forEach((btn) => {
+      const isActive = Number(btn.dataset.tier) === index;
+      btn.classList.toggle('btn-primary', isActive);
+      btn.classList.toggle('btn-outline-dark', !isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+    fields.office.size.textContent = `${tier.label} per person`;
+    fields.office.price.textContent = tier.office;
+    fields.files.size.textContent = `${tier.label} per person`;
+    fields.files.price.textContent = tier.files;
+    fields.groups.size.textContent = `${tier.label} per person`;
+    fields.groups.price.textContent = tier.groups;
+  }
+
+  buttons.forEach((btn) => btn.addEventListener('click', () => setTier(Number(btn.dataset.tier))));
+</script>

@@ -1,0 +1,8 @@
+---
+import { getEntry } from 'astro:content';
+import ComparisonTemplate from '../layouts/ComparisonTemplate.astro';
+
+const entry = await getEntry('comparisons', 'google-drive');
+---
+
+<ComparisonTemplate title='Bigby vs Google Drive: An Honest Comparison | Bigby' description='Bigby vs Google Drive compared honestly, including where Google wins. UK jurisdiction, no scanning and no AI training against cheaper storage.' comparison={entry.data} />

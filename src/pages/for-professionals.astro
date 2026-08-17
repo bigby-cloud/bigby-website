@@ -1,0 +1,8 @@
+---
+import { getEntry } from 'astro:content';
+import PersonaHubTemplate from '../layouts/PersonaHubTemplate.astro';
+
+const entry = await getEntry('persona-hubs', 'professionals');
+---
+
+<PersonaHubTemplate title='Secure Cloud Storage for Professionals | UK | Bigby' description='Private, encrypted cloud storage for professionals who handle confidential files. UK servers, UK law, no data harvesting. From £3.99 per month.' hub={entry.data} />

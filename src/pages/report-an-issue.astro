@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const thanksUrl = new URL('/report-an-issue/thanks/', Astro.site);
+---
+
+<Base title="Report an Issue | Bigby.cloud" description="Report a bug or issue with Bigby.cloud." noindex={true}>
+  <Header />
+  <main>
+    <section class="py-5">
+      <div class="container" style="max-width: 560px;">
+        <h1 class="mb-4">Report an issue</h1>
+        <form action="https://formspree.io/f/xgawknko" method="POST">
+          <input type="hidden" name="_next" value={thanksUrl} />
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" />
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required />
+          </div>
+          <div class="mb-3">
+            <label for="describe_your_issue" class="form-label">Describe your issue</label>
+            <textarea class="form-control" id="describe_your_issue" name="describe_your_issue" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

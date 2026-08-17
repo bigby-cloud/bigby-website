@@ -1,0 +1,42 @@
+---
+const navLinks = [
+  { href: '/drive/', label: 'Bigby.drive' },
+  { href: '/waiting-list/', label: 'Join the Waiting List' },
+  { href: '/compare/', label: 'Compare' },
+  { href: '/blog/', label: 'Blog' },
+];
+---
+
+<header class="border-bottom">
+  <nav class="navbar navbar-expand-lg py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold fs-4 text-brand" href="/">
+        <img src="/logo-white-cropped-01.jpeg" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#primary-nav"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="primary-nav">
+        <ul class="navbar-nav ms-auto">
+          {
+            navLinks.map((link) => (
+              <li class="nav-item">
+                <a class="nav-link" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PersonaHero from '../components/PersonaHero.astro';
+import TwoColumnIntro from '../components/TwoColumnIntro.astro';
+import CardGrid from '../components/CardGrid.astro';
+import HowBigbyWorks from '../components/HowBigbyWorks.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  persona: CollectionEntry<'personas'>['data'];
+}
+
+const { title, description, persona } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main>
+    <PersonaHero
+      image={persona.heroImage}
+      imageAlt={persona.heroImageAlt}
+      heading={persona.heroHeading}
+      subhead={persona.heroSubhead}
+      anchorId={persona.heroAnchorId}
+      anchorLabel={persona.heroAnchorLabel}
+    />
+    <TwoColumnIntro
+      heading={persona.introHeading}
+      paragraphs={persona.introParagraphs}
+      image={persona.introImage}
+      imageAlt={persona.introImageAlt}
+    />
+    <CardGrid
+      heading={persona.risksHeading}
+      subhead={persona.risksSubhead}
+      items={persona.risks}
+      anchorId={persona.heroAnchorId}
+    />
+    <HowBigbyWorks step4Heading={persona.howItWorksStep4Heading} step4Body={persona.howItWorksStep4Body} />
+    <FaqAccordion faqs={persona.faqs} idPrefix="persona-faq" />
+    <ClosingCta heading={persona.closingHeading} subhead={persona.closingSubhead} />
+  </main>
+  <Footer />
+</Base>
