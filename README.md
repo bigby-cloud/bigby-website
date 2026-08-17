@@ -32,7 +32,16 @@ docker compose up --build --remove-orphans   # dev server at localhost:4321
 
 Local Node/pnpm install is not recommended to keep dependencies installed inside the container.
 
-Run `docker compose run --rm dev pnpm build` to test a full site build.
+All pnmp/npm commands can be run with compose, e.g. `docker compose run --rm dev pnpm build` to test a full site build.
+
+### Package locks
+
+For compatibility with external tools, please ensure we keep both and pnpm and npm lock file up to date:
+
+```
+docker compose run --rm dev pnpm i
+docker compose run --rm dev npm i --package-lock-only
+```
 
 ## Shipping a change
 
