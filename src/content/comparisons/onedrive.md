@@ -20,7 +20,7 @@ rows:
     bigby: "Subscriptions only. Storage is the entire product."
     competitor: "Storage as a hook into the Microsoft 365 and Copilot ecosystem."
   - label: "Encryption"
-    bigby: "Encrypted at rest on UK servers."
+    bigby: "Encrypted in transit and at rest on UK servers. Bigby holds the keys, which is what makes in-browser document editing work."
     competitor: "Encrypted at rest and in transit; Microsoft holds the keys and can access content."
   - label: "Price for 1TB"
     bigby: "£9.99 per user per month (Storage plan, annual billing)."

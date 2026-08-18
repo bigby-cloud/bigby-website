@@ -20,7 +20,7 @@ rows:
     bigby: "Subscriptions only. No advertising, no free tier, no investors to feed."
     competitor: "Subscriptions, plus a publicly listed company with growth pressure and an expanding product surface."
   - label: "Encryption"
-    bigby: "Encrypted at rest on UK servers."
+    bigby: "Encrypted in transit and at rest on UK servers. Bigby holds the keys, which is what makes in-browser document editing work."
     competitor: "Encrypted at rest and in transit; Dropbox manages the keys."
   - label: "Price for 1TB"
     bigby: "£9.99 per user per month (Storage plan, annual billing)."

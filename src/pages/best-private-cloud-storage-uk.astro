@@ -10,7 +10,7 @@ import countryside from '../assets/images/guiville-w5H7FE3r4Nc-unsplash-1024x768
 const shortlist = [
   {
     heading: 'Bigby: best for UK data residency',
-    body: 'Our product, so apply scepticism, but here is the factual case. Bigby is the only service on this list that is UK-owned, UK-run and stores data exclusively on UK servers under UK GDPR, with no US parent company and no CLOUD Act exposure. Files are encrypted at rest, never scanned, and never used for AI training. The business is funded entirely by subscriptions, from £3.99 per user per month for 100GB, with Collabora document editing on the Office plans and WebDAV export so you are never locked in. The honest weaknesses: no end-to-end encryption, no mobile apps yet, no free tier, and a higher price per gigabyte than Big Tech. If UK jurisdiction is your first requirement, this is the option built specifically for it.',
+    body: 'Our product, so apply scepticism, but here is the factual case. Bigby is the only service on this list that is UK-owned, UK-run and stores data exclusively on UK servers under UK GDPR, with no US parent company and no CLOUD Act exposure. Files are encrypted in transit and at rest, never scanned, and never used for AI training. The business is funded entirely by subscriptions, from £3.99 per user per month for 100GB, with Collabora document editing on the Office plans and WebDAV export so you are never locked in. The honest weaknesses: no end-to-end encryption, no mobile apps yet, no free tier, and a higher price per gigabyte than Big Tech. If UK jurisdiction is your first requirement, this is the option built specifically for it.',
   },
   {
     heading: 'Proton Drive: best end-to-end encrypted all-rounder',
@@ -35,7 +35,7 @@ const shortlist = [
 ];
 
 const atAGlance = [
-  { service: 'Bigby', jurisdiction: 'UK', encryption: 'At rest, no scanning, no AI training', bestFor: 'UK data residency, UK law' },
+  { service: 'Bigby', jurisdiction: 'UK', encryption: 'In transit and at rest, provider-held keys', bestFor: 'UK data residency, UK law' },
   { service: 'Proton Drive', jurisdiction: 'Switzerland', encryption: 'End-to-end by default', bestFor: 'E2EE all-rounder' },
   { service: 'Tresorit', jurisdiction: 'Switzerland', encryption: 'End-to-end by default', bestFor: 'Business compliance' },
   { service: 'Sync.com', jurisdiction: 'Canada', encryption: 'End-to-end by default', bestFor: 'E2EE on a budget' },

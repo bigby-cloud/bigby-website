@@ -26,7 +26,7 @@ howItWorksStep4Heading: "04. UK data residency throughout"
 howItWorksStep4Body: "All data is stored on UK-based infrastructure. UK GDPR applies. There is no transfer to US servers and no exposure to US jurisdiction. Your clients’ financial data does not leave the UK."
 faqs:
   - question: "Does Bigby help with our UK GDPR obligations as a data controller?"
-    answer: "Bigby is designed to reduce your exposure. UK data residency, encryption at rest, and clear data processing terms mean your storage arrangements are on considerably stronger ground than with a general consumer or business cloud service. That said, GDPR compliance for an accountancy practice extends beyond storage alone. We would recommend a full review of your data handling practices with a qualified adviser."
+    answer: "Bigby is designed to reduce your exposure. UK data residency, encryption in transit and at rest, and clear data processing terms mean your storage arrangements are on considerably stronger ground than with a general consumer or business cloud service. That said, GDPR compliance for an accountancy practice extends beyond storage alone. We would recommend a full review of your data handling practices with a qualified adviser."
   - question: "Can I store client tax records and payroll files securely?"
     answer: "Yes. Bigby does not access the contents of files stored on the service. Tax returns, payroll records, management accounts, and client correspondence can all be stored and accessed without the contents being read or scanned by Bigby or any third party. Encryption applies to all files on all plans."
   - question: "What happens if Bigby receives a legal demand for access to our files?"
