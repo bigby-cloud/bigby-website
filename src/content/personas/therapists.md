@@ -26,7 +26,7 @@ howItWorksStep4Heading: "04. Your clients’ data stays in the UK"
 howItWorksStep4Body: "All data is stored on UK-based infrastructure. UK GDPR applies. There is no transfer to US servers, no exposure to US data law, and no ambiguity about where your clients’ information sits."
 faqs:
   - question: "Does using Bigby help with my GDPR obligations?"
-    answer: "Bigby is designed to reduce your exposure as a data controller. UK data residency, encryption at rest, and a clear, plain-language data processing approach mean you are on considerably stronger ground than with a general consumer service. That said, GDPR compliance is broader than storage alone, and we would always encourage reviewing your full data handling practices, ideally with a professional adviser."
+    answer: "Bigby is designed to reduce your exposure as a data controller. UK data residency, encryption in transit and at rest, and a clear, plain-language data processing approach mean you are on considerably stronger ground than with a general consumer service. That said, GDPR compliance is broader than storage alone, and we would always encourage reviewing your full data handling practices, ideally with a professional adviser."
   - question: "Can I store session notes and client records securely?"
     answer: "Yes, and that is precisely the kind of use Bigby is built for. Documents, notes, correspondence, and assessments can all be stored and accessed securely. Bigby does not access the contents of stored files. If you work with colleagues or within supervision, the Office plan allows document collaboration within your encrypted workspace."
   - question: "What happens if Bigby receives a request for my data?"

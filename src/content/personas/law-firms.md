@@ -26,7 +26,7 @@ howItWorksStep4Heading: "04. UK data residency throughout"
 howItWorksStep4Body: "All data is stored on UK-based infrastructure. UK GDPR applies. There is no transfer to US servers and no exposure to US jurisdiction. Your clients’ data does not leave the UK."
 faqs:
   - question: "Does Bigby help satisfy our UK GDPR obligations as a data controller?"
-    answer: "Bigby is designed to reduce your exposure. UK data residency, encryption at rest, and straightforward data processing terms mean your storage arrangements are on considerably stronger ground than with a general consumer or business cloud service. That said, GDPR compliance for a law firm extends well beyond storage. We would always recommend a full review of your data handling practices with a qualified adviser."
+    answer: "Bigby is designed to reduce your exposure. UK data residency, encryption in transit and at rest, and straightforward data processing terms mean your storage arrangements are on considerably stronger ground than with a general consumer or business cloud service. That said, GDPR compliance for a law firm extends well beyond storage. We would always recommend a full review of your data handling practices with a qualified adviser."
   - question: "Can privileged documents be stored securely on Bigby?"
     answer: "Yes. Bigby does not access the contents of files stored on the service. Privileged advice, client correspondence, witness statements, and other sensitive documents can be stored and accessed without the contents being read or scanned by Bigby or any third party. Encryption applies to all files on all plans."
   - question: "What happens if Bigby receives a legal demand for access to our files?"
