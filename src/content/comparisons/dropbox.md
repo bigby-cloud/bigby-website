@@ -29,7 +29,7 @@ rows:
     bigby: "None."
     competitor: "2GB free."
   - label: "Documents"
-    bigby: "Bigby has its own office suite. The Office plans include Collabora documents, spreadsheets and presentations, edited in the browser."
+    bigby: "Bigby has its own office suite. The Office plans include Collabora documents, spreadsheets and presentations, editable in the browser with live collaboration with other users."
     competitor: "Dropbox Paper, plus tight integrations with Microsoft Office and Google Docs."
   - label: "Sync and mobile"
     bigby: "Web and desktop. Sync is solid; mobile apps not yet available."
