@@ -29,7 +29,7 @@ rows:
     bigby: "None."
     competitor: "2GB free."
   - label: "Documents"
-    bigby: "Collabora docs, spreadsheets and presentations on Office plans."
+    bigby: "Bigby has its own office suite. The Office plans include Collabora documents, spreadsheets and presentations, edited in the browser."
     competitor: "Dropbox Paper, plus tight integrations with Microsoft Office and Google Docs."
   - label: "Sync and mobile"
     bigby: "Web and desktop. Sync is solid; mobile apps not yet available."
@@ -52,7 +52,7 @@ chooseBigbyItems:
   - heading: "You want storage without AI ambitions"
     body: "Dropbox is pushing into AI-powered search and assistants, which by definition process your content. Bigby’s position is simpler: stored content is never scanned, analysed or used for AI training. Not as a setting you toggle, but as the design of the business."
   - heading: "You want docs included"
-    body: "Dropbox stores files; for editing you bolt on Microsoft or Google. Bigby’s Office plans include Collabora documents, spreadsheets and presentations on the same private servers, from £5.99 per user per month. One subscription, no third-party processing."
+    body: "Dropbox stores files; for editing you bolt on Microsoft or Google. Bigby has its own office suite, so there is nothing to bolt on: the Office plans include Collabora documents, spreadsheets and presentations on the same private servers, from £5.99 per user per month. One subscription, no third-party processing."
 faqs:
   - question: "Is Dropbox bad for privacy?"
     answer: "Bad is the wrong word. Dropbox encrypts data and has a reasonable security record. The issue is structural: it is a US company that holds the encryption keys, can access content, and is building AI features that process what you store. If none of that troubles you, Dropbox is a fine product. If it does, you want a provider whose legal position and business model are different, which is what Bigby is."
