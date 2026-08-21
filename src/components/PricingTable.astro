@@ -1,10 +1,8 @@
 ---
-// Prices per storage tier: [100GB, 500GB, 1TB], annual billing, per user/month.
-const tiers = [
-  { label: '100 GB', office: '£5.99', files: '£3.99', groups: '£4.99', badge: 'From £3.99' },
-  { label: '500 GB', office: '£9.99', files: '£6.99', groups: '£7.99', badge: null },
-  { label: '1 TB', office: '£12.99', files: '£9.99', groups: '£11.99', badge: null },
-];
+import { tiers, topUp, formatPrice } from '../data/pricing';
+
+// The table opens on 500 GB, the middle size, and on annual pricing.
+const defaultTier = 1;
 ---
 
 <div id="bgb-pricing">
@@ -22,9 +20,9 @@ const tiers = [
             </span>
             <button
               type="button"
-              class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === 1 ? 'btn-primary' : 'btn-outline-dark']}
+              class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === defaultTier ? 'btn-primary' : 'btn-outline-dark']}
               data-tier={i}
-              aria-pressed={i === 1 ? 'true' : 'false'}
+              aria-pressed={i === defaultTier ? 'true' : 'false'}
             >
               {tier.label}
             </button>
@@ -64,8 +62,8 @@ const tiers = [
           </div>
           <div class="mt-auto d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
             <div>
-              <div class="small text-white-50" data-field="office-size">500 GB per person</div>
-              <div><span class="fs-3" data-field="office-price">£9.99</span><span class="text-white-50">/month</span></div>
+              <div class="small text-white-50" data-field="office-size">{tiers[defaultTier].label} per person</div>
+              <div><span class="fs-3" data-field="office-price">{formatPrice(tiers[defaultTier].office.annual)}</span><span class="text-white-50">/month</span></div>
               <div class="small text-white-50">Annual price, billed yearly.</div>
             </div>
             <a class="btn btn-light" href="/waiting-list/">Join the waiting list</a>
@@ -86,8 +84,8 @@ const tiers = [
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="files-size">500 GB per person</div>
-            <div><span class="fs-4" data-field="files-price">£6.99</span><span class="text-body-secondary">/month</span></div>
+            <div class="small text-body-secondary" data-field="files-size">{tiers[defaultTier].label} per person</div>
+            <div><span class="fs-4" data-field="files-price">{formatPrice(tiers[defaultTier].files.annual)}</span><span class="text-body-secondary">/month</span></div>
             <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
@@ -106,8 +104,8 @@ const tiers = [
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="groups-size">500 GB per person</div>
-            <div><span class="fs-4" data-field="groups-price">£7.99</span><span class="text-body-secondary">/user/mo</span></div>
+            <div class="small text-body-secondary" data-field="groups-size">{tiers[defaultTier].label} per person</div>
+            <div><span class="fs-4" data-field="groups-price">{formatPrice(tiers[defaultTier].groups.annual)}</span><span class="text-body-secondary">/user/mo</span></div>
             <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
@@ -117,12 +115,14 @@ const tiers = [
   </div>
 
   <div class="alert alert-light border mt-4">
-    <strong>Need more room?</strong> Add 100 GB per person for <strong>£1.49/month</strong>. Available on any plan, no
+    <strong>Need more room?</strong> Add 100 GB per person for <strong>{formatPrice(topUp.annual)}/month</strong>. Available on any plan, no
     tier change needed.
   </div>
 </div>
 
 <script define:vars={{ tiers }}>
+  const formatPrice = (value) => `£${value.toFixed(2)}`;
+
   const buttons = document.querySelectorAll('.bgb-tier-btn');
   const fields = {
     office: { size: document.querySelector('[data-field="office-size"]'), price: document.querySelector('[data-field="office-price"]') },
@@ -139,11 +139,11 @@ const tiers = [
       btn.setAttribute('aria-pressed', String(isActive));
     });
     fields.office.size.textContent = `${tier.label} per person`;
-    fields.office.price.textContent = tier.office;
+    fields.office.price.textContent = formatPrice(tier.office.annual);
     fields.files.size.textContent = `${tier.label} per person`;
-    fields.files.price.textContent = tier.files;
+    fields.files.price.textContent = formatPrice(tier.files.annual);
     fields.groups.size.textContent = `${tier.label} per person`;
-    fields.groups.price.textContent = tier.groups;
+    fields.groups.price.textContent = formatPrice(tier.groups.annual);
   }
 
   buttons.forEach((btn) => btn.addEventListener('click', () => setTier(Number(btn.dataset.tier))));
