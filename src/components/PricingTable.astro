@@ -13,6 +13,7 @@ import {
 // The table opens on 500 GB, the middle size, and on annual billing. Annual is
 // the price we lead with, so it stays the default no matter what else changes.
 const defaultTier = 1;
+const defaultPeriod = 0;
 
 const periods = [
   {
@@ -20,20 +21,32 @@ const periods = [
     label: 'Annual',
     badge: `Save ${annualSavingPercent}%`,
     caption: 'Annual price, billed yearly.',
-    saving: 'You save SAVING a year against paying monthly.',
+    saving: (amount: string) => `You save ${amount} a year against paying monthly.`,
   },
   {
     key: 'monthly',
     label: 'Monthly',
     badge: null,
     caption: `Monthly price. Save ${annualSavingPercent}% on annual.`,
-    saving: 'Switch to annual billing and save SAVING a year.',
+    saving: (amount: string) => `Switch to annual billing and save ${amount} a year.`,
   },
 ];
 
-const savingLine = (period: (typeof periods)[number], saving: number) =>
-  period.saving.replace('SAVING', formatSaving(saving));
-const defaultPeriod = 0;
+// Every state the two toggles can produce, worked out and formatted here so the
+// browser script only swaps text and never repeats the pricing arithmetic.
+const views = tiers.map((tier) =>
+  periods.map((period) => ({
+    size: `${tier.label} per person`,
+    office: formatPrice(tier.office[period.key]),
+    files: formatPrice(tier.files[period.key]),
+    groups: formatPrice(tier.groups[period.key]),
+    topUp: formatPrice(topUp[period.key]),
+    caption: period.caption,
+    saving: period.saving(formatSaving(yearlySaving(tier.office))),
+  })),
+);
+
+const defaultView = views[defaultTier][defaultPeriod];
 ---
 
 <div id="bgb-pricing">
@@ -128,15 +141,15 @@ const defaultPeriod = 0;
             <div class="d-flex align-items-center gap-3 rounded-3 bg-black bg-opacity-50 px-3 py-3">
               <span class="fs-4 lh-1" aria-hidden="true">★</span>
               <span data-field="office-saving">
-                {savingLine(periods[defaultPeriod], yearlySaving(tiers[defaultTier].office))}
+                {defaultView.saving}
               </span>
             </div>
           </div>
           <div class="mt-3 d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
             <div>
-              <div class="small text-white-50" data-field="office-size">{tiers[defaultTier].label} per person</div>
-              <div><span class="fs-3" data-field="office-price">{formatPrice(tiers[defaultTier].office[periods[defaultPeriod].key])}</span><span class="text-white-50">/month</span></div>
-              <div class="small text-white-50" data-field="office-caption">{periods[defaultPeriod].caption}</div>
+              <div class="small text-white-50" data-field="office-size">{defaultView.size}</div>
+              <div><span class="fs-3" data-field="office-price">{defaultView.office}</span><span class="text-white-50">/month</span></div>
+              <div class="small text-white-50" data-field="office-caption">{defaultView.caption}</div>
             </div>
             <a class="btn btn-light" href="/waiting-list/">Join the waiting list</a>
           </div>
@@ -156,9 +169,9 @@ const defaultPeriod = 0;
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="files-size">{tiers[defaultTier].label} per person</div>
-            <div><span class="fs-4" data-field="files-price">{formatPrice(tiers[defaultTier].files[periods[defaultPeriod].key])}</span><span class="text-body-secondary">/month</span></div>
-            <div class="small text-body-secondary mb-3" data-field="files-caption">{periods[defaultPeriod].caption}</div>
+            <div class="small text-body-secondary" data-field="files-size">{defaultView.size}</div>
+            <div><span class="fs-4" data-field="files-price">{defaultView.files}</span><span class="text-body-secondary">/month</span></div>
+            <div class="small text-body-secondary mb-3" data-field="files-caption">{defaultView.caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -176,9 +189,9 @@ const defaultPeriod = 0;
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="groups-size">{tiers[defaultTier].label} per person</div>
-            <div><span class="fs-4" data-field="groups-price">{formatPrice(tiers[defaultTier].groups[periods[defaultPeriod].key])}</span><span class="text-body-secondary">/user/mo</span></div>
-            <div class="small text-body-secondary mb-3" data-field="groups-caption">{periods[defaultPeriod].caption}</div>
+            <div class="small text-body-secondary" data-field="groups-size">{defaultView.size}</div>
+            <div><span class="fs-4" data-field="groups-price">{defaultView.groups}</span><span class="text-body-secondary">/user/mo</span></div>
+            <div class="small text-body-secondary mb-3" data-field="groups-caption">{defaultView.caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -187,7 +200,7 @@ const defaultPeriod = 0;
   </div>
 
   <div class="alert alert-light border mt-4">
-    <strong>Need more room?</strong> Add 100 GB per person for <strong data-field="topup-price">{formatPrice(topUp[periods[defaultPeriod].key])}</strong><strong>/month</strong>. Available on any plan, no
+    <strong>Need more room?</strong> Add 100 GB per person for <strong><span data-field="topup-price">{defaultView.topUp}</span>/month</strong>. Available on any plan, no
     tier change needed.
   </div>
 
@@ -238,9 +251,7 @@ const defaultPeriod = 0;
   </details>
 </div>
 
-<script define:vars={{ tiers, topUp, periods, defaultTier, defaultPeriod }}>
-  const formatPrice = (value) => `\u00a3${value.toFixed(2)}`;
-
+<script define:vars={{ views, defaultTier, defaultPeriod }}>
   const tierButtons = document.querySelectorAll('.bgb-tier-btn');
   const periodButtons = document.querySelectorAll('.bgb-period-btn');
   const field = (name) => document.querySelector(`[data-field="${name}"]`);
@@ -253,9 +264,6 @@ const defaultPeriod = 0;
   );
   const topUpPrice = field('topup-price');
   const officeSaving = field('office-saving');
-
-  const formatSaving = (value) =>
-    Number.isInteger(value) ? `\u00a3${value}` : `\u00a3${value.toFixed(2)}`;
 
   let tierIndex = defaultTier;
   let periodIndex = defaultPeriod;
@@ -270,22 +278,19 @@ const defaultPeriod = 0;
   }
 
   function render() {
-    const tier = tiers[tierIndex];
-    const period = periods[periodIndex];
+    const view = views[tierIndex][periodIndex];
 
     markActive(tierButtons, tierIndex, 'tier');
     markActive(periodButtons, periodIndex, 'period');
 
     plans.forEach((plan) => {
-      fields[plan].size.textContent = `${tier.label} per person`;
-      fields[plan].price.textContent = formatPrice(tier[plan][period.key]);
-      fields[plan].caption.textContent = period.caption;
+      fields[plan].size.textContent = view.size;
+      fields[plan].price.textContent = view[plan];
+      fields[plan].caption.textContent = view.caption;
     });
 
-    topUpPrice.textContent = formatPrice(topUp[period.key]);
-
-    const saving = (tier.office.monthly - tier.office.annual) * 12;
-    officeSaving.textContent = period.saving.replace('SAVING', formatSaving(saving));
+    topUpPrice.textContent = view.topUp;
+    officeSaving.textContent = view.saving;
   }
 
   tierButtons.forEach((btn) =>
