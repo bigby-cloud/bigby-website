@@ -36,7 +36,7 @@ faqs:
   - question: "How does Bigby handle storage for families spread across different countries?"
     answer: "The Group plan provides shared encrypted storage for three or more users from £4.99 per user per month. It is well suited to families managing shared documents across multiple locations and countries. Each member has their own access, shared folders can be set up for documents that need to be accessible to more than one person, and everything remains encrypted throughout."
   - question: "How much does Bigby cost?"
-    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage on annual billing, in GBP. For most expats storing documents rather than large media files, 100 GB is more than sufficient. The Office plan adds document and spreadsheet collaboration from £5.99 per month. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/pricing."
+    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage on annual billing, in GBP. For most expats storing documents rather than large media files, 100 GB is more than sufficient. The Office plan adds document and spreadsheet collaboration from £5.99 per month. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/drive/#pricing."
 closingHeading: "Your UK documents, stored in the UK, accessible wherever you are"
 closingSubhead: "Private, encrypted, UK-based cloud storage from £3.99 per month. Built for people who need their most important documents to stay safe, legal, and accessible from anywhere."
 ---

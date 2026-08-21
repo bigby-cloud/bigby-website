@@ -50,7 +50,7 @@ faqs:
   - question: "Is Bigby difficult to use?"
     answer: "No. Bigby is available on web and desktop and is designed to be straightforward for everyday use. You upload files, access them when you need them, and share what you choose to share. The encryption happens automatically in the background. No technical knowledge is required to get started."
   - question: "How much does Bigby cost?"
-    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage on annual billing. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For families or groups, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/pricing."
+    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage on annual billing. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For families or groups, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/drive/#pricing."
 closingHeading: "Your personal files deserve better than a free account"
 closingSubhead: "Private, encrypted, UK-based cloud storage from £3.99 per month. No data harvesting, no AI training, no business model that depends on your files."
 ---
