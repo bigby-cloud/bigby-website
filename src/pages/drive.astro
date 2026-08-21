@@ -5,10 +5,53 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PricingTable from '../components/PricingTable.astro';
 import JsonLd from '../components/JsonLd.astro';
+import { tiers, topUp, planKeys, planNames } from '../data/pricing';
 import lockers from '../assets/images/laura-rivera-nT9cQNZ67qI-unsplash.jpg';
 import calculator from '../assets/images/jakub-zerdzicki-LgE3whpa5VA-unsplash.jpg';
 import ringBinders from '../assets/images/augustin-foto-jonas-augustin-MTqaqBY6lfA-unsplash.jpg';
 import viaduct from '../assets/images/joe-cleary-sIcAcPOgpMU-unsplash.jpg';
+
+const billingPeriods = [
+  { key: 'annual' as const, duration: 12, description: 'Per user per month, billed annually' },
+  { key: 'monthly' as const, duration: 1, description: 'Per user per month, billed monthly' },
+];
+
+const buildOffer = (name: string, price: number, period: (typeof billingPeriods)[number]) => ({
+  '@type': 'Offer',
+  name,
+  priceCurrency: 'GBP',
+  price: price.toFixed(2),
+  availability: 'https://schema.org/PreOrder',
+  url: 'https://bigby.cloud/drive/#pricing',
+  priceSpecification: {
+    '@type': 'UnitPriceSpecification',
+    priceCurrency: 'GBP',
+    price: price.toFixed(2),
+    billingDuration: period.duration,
+    billingIncrement: 1,
+    unitCode: 'MON',
+    description: period.description,
+  },
+});
+
+// Spelling every price out as its own Offer means an assistant reading the raw
+// HTML gets the whole price list, rather than whichever single figure the
+// pricing table happened to render first.
+const planOffers = planKeys.flatMap((plan) =>
+  tiers.flatMap((tier) =>
+    billingPeriods.map((period) =>
+      buildOffer(`${planNames[plan]}, ${tier.label}`, tier[plan][period.key], period),
+    ),
+  ),
+);
+
+// The top-up is an add-on rather than a plan, so it is listed separately and
+// kept out of lowPrice, which should stay the cheapest plan anyone can buy.
+const topUpOffers = billingPeriods.map((period) =>
+  buildOffer(`Storage top-up, ${topUp.label}`, topUp[period.key], period),
+);
+
+const planPrices = planOffers.map((offer) => Number(offer.price)).sort((a, b) => a - b);
 
 const productSchema = {
   '@context': 'https://schema.org',
@@ -22,10 +65,17 @@ const productSchema = {
   offers: {
     '@type': 'AggregateOffer',
     priceCurrency: 'GBP',
-    lowPrice: '3.99',
-    highPrice: '12.99',
-    offerCount: '9',
+    lowPrice: planPrices[0].toFixed(2),
+    highPrice: planPrices[planPrices.length - 1].toFixed(2),
+    offerCount: String(planOffers.length),
     url: 'https://bigby.cloud/drive/#pricing',
+    offers: planOffers,
+  },
+  isRelatedTo: {
+    '@type': 'Product',
+    name: 'Bigby.drive storage top-up',
+    description: 'Adds 100 GB per person to any Bigby.drive plan, with no need to change tier.',
+    offers: topUpOffers,
   },
 };
 

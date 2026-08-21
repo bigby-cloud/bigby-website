@@ -1,5 +1,5 @@
 ---
-import { tiers, topUp, formatPrice, annualSavingPercent } from '../data/pricing';
+import { tiers, topUp, formatPrice, annualSavingPercent, planKeys, planNames } from '../data/pricing';
 
 // The table opens on 500 GB, the middle size, and on annual billing. Annual is
 // the price we lead with, so it stays the default no matter what else changes.
@@ -153,6 +153,52 @@ const defaultPeriod = 0;
     <strong>Need more room?</strong> Add 100 GB per person for <strong data-field="topup-price">{formatPrice(topUp[periods[defaultPeriod].key])}</strong><strong>/month</strong>. Available on any plan, no
     tier change needed.
   </div>
+
+  {/*
+    The cards above show one price at a time, which means anything reading the
+    page without clicking through the toggles only ever sees a single figure.
+    This table lists every price in the page source instead, so search engines
+    and AI assistants can quote the full range without running our JavaScript.
+  */}
+  <details class="mt-4">
+    <summary class="fw-medium">See every plan and price in one table</summary>
+    <div class="table-responsive mt-3">
+      <table class="table table-sm align-middle mb-0">
+        <caption>
+          Bigby.drive prices in GBP, per person, per month. Annual figures are the monthly equivalent when you pay for
+          a year up front. Monthly figures are what you pay when you pay month to month.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Plan</th>
+            <th scope="col">Storage</th>
+            <th scope="col">Annual (per month)</th>
+            <th scope="col">Monthly</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            planKeys.map((plan) =>
+              tiers.map((tier) => (
+                <tr>
+                  <th scope="row" class="fw-normal">{planNames[plan]}</th>
+                  <td>{tier.label}</td>
+                  <td>{formatPrice(tier[plan].annual)}</td>
+                  <td>{formatPrice(tier[plan].monthly)}</td>
+                </tr>
+              )),
+            )
+          }
+          <tr>
+            <th scope="row" class="fw-normal">Storage top-up</th>
+            <td>{topUp.label}</td>
+            <td>{formatPrice(topUp.annual)}</td>
+            <td>{formatPrice(topUp.monthly)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
 </div>
 
 <script define:vars={{ tiers, topUp, periods, defaultTier, defaultPeriod }}>
