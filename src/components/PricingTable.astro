@@ -1,34 +1,69 @@
 ---
-import { tiers, topUp, formatPrice } from '../data/pricing';
+import { tiers, topUp, formatPrice, annualSavingPercent } from '../data/pricing';
 
-// The table opens on 500 GB, the middle size, and on annual pricing.
+// The table opens on 500 GB, the middle size, and on annual billing. Annual is
+// the price we lead with, so it stays the default no matter what else changes.
 const defaultTier = 1;
+
+const periods = [
+  { key: 'annual', label: 'Annual', badge: `Save ${annualSavingPercent}%`, caption: 'Annual price, billed yearly.' },
+  { key: 'monthly', label: 'Monthly', badge: null, caption: `Monthly price. Save ${annualSavingPercent}% on annual.` },
+];
+const defaultPeriod = 0;
 ---
 
 <div id="bgb-pricing">
-  <div class="mb-4">
-    <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
-    <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
-      {
-        tiers.map((tier, i) => (
-          <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
-            <span
-              class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !tier.badge }]}
-              style="font-size: 0.75rem; padding-block: 0.4em;"
-            >
-              {tier.badge ?? 'placeholder'}
-            </span>
-            <button
-              type="button"
-              class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === defaultTier ? 'btn-primary' : 'btn-outline-dark']}
-              data-tier={i}
-              aria-pressed={i === defaultTier ? 'true' : 'false'}
-            >
-              {tier.label}
-            </button>
-          </div>
-        ))
-      }
+  <div class="row g-3 g-lg-4 mb-4">
+    <div class="col-lg-7">
+      <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
+      <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
+        {
+          tiers.map((tier, i) => (
+            <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
+              <span
+                class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !tier.badge }]}
+                style="font-size: 0.75rem; padding-block: 0.4em;"
+              >
+                {tier.badge ?? 'placeholder'}
+              </span>
+              <button
+                type="button"
+                class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === defaultTier ? 'btn-primary' : 'btn-outline-dark']}
+                data-tier={i}
+                aria-pressed={i === defaultTier ? 'true' : 'false'}
+              >
+                {tier.label}
+              </button>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your billing:</span>
+      <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your billing period">
+        {
+          periods.map((period, i) => (
+            <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
+              <span
+                class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !period.badge }]}
+                style="font-size: 0.75rem; padding-block: 0.4em;"
+              >
+                {period.badge ?? 'placeholder'}
+              </span>
+              <button
+                type="button"
+                class:list={['btn btn-lg w-100 fw-medium bgb-period-btn', i === defaultPeriod ? 'btn-primary' : 'btn-outline-dark']}
+                data-period={i}
+                aria-pressed={i === defaultPeriod ? 'true' : 'false'}
+              >
+                {period.label}
+              </button>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 
@@ -63,8 +98,8 @@ const defaultTier = 1;
           <div class="mt-auto d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
             <div>
               <div class="small text-white-50" data-field="office-size">{tiers[defaultTier].label} per person</div>
-              <div><span class="fs-3" data-field="office-price">{formatPrice(tiers[defaultTier].office.annual)}</span><span class="text-white-50">/month</span></div>
-              <div class="small text-white-50">Annual price, billed yearly.</div>
+              <div><span class="fs-3" data-field="office-price">{formatPrice(tiers[defaultTier].office[periods[defaultPeriod].key])}</span><span class="text-white-50">/month</span></div>
+              <div class="small text-white-50" data-field="office-caption">{periods[defaultPeriod].caption}</div>
             </div>
             <a class="btn btn-light" href="/waiting-list/">Join the waiting list</a>
           </div>
@@ -85,8 +120,8 @@ const defaultTier = 1;
           <hr />
           <div class="mt-auto">
             <div class="small text-body-secondary" data-field="files-size">{tiers[defaultTier].label} per person</div>
-            <div><span class="fs-4" data-field="files-price">{formatPrice(tiers[defaultTier].files.annual)}</span><span class="text-body-secondary">/month</span></div>
-            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <div><span class="fs-4" data-field="files-price">{formatPrice(tiers[defaultTier].files[periods[defaultPeriod].key])}</span><span class="text-body-secondary">/month</span></div>
+            <div class="small text-body-secondary mb-3" data-field="files-caption">{periods[defaultPeriod].caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -105,8 +140,8 @@ const defaultTier = 1;
           <hr />
           <div class="mt-auto">
             <div class="small text-body-secondary" data-field="groups-size">{tiers[defaultTier].label} per person</div>
-            <div><span class="fs-4" data-field="groups-price">{formatPrice(tiers[defaultTier].groups.annual)}</span><span class="text-body-secondary">/user/mo</span></div>
-            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <div><span class="fs-4" data-field="groups-price">{formatPrice(tiers[defaultTier].groups[periods[defaultPeriod].key])}</span><span class="text-body-secondary">/user/mo</span></div>
+            <div class="small text-body-secondary mb-3" data-field="groups-caption">{periods[defaultPeriod].caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -115,36 +150,65 @@ const defaultTier = 1;
   </div>
 
   <div class="alert alert-light border mt-4">
-    <strong>Need more room?</strong> Add 100 GB per person for <strong>{formatPrice(topUp.annual)}/month</strong>. Available on any plan, no
+    <strong>Need more room?</strong> Add 100 GB per person for <strong data-field="topup-price">{formatPrice(topUp[periods[defaultPeriod].key])}</strong><strong>/month</strong>. Available on any plan, no
     tier change needed.
   </div>
 </div>
 
-<script define:vars={{ tiers }}>
-  const formatPrice = (value) => `£${value.toFixed(2)}`;
+<script define:vars={{ tiers, topUp, periods, defaultTier, defaultPeriod }}>
+  const formatPrice = (value) => `\u00a3${value.toFixed(2)}`;
 
-  const buttons = document.querySelectorAll('.bgb-tier-btn');
-  const fields = {
-    office: { size: document.querySelector('[data-field="office-size"]'), price: document.querySelector('[data-field="office-price"]') },
-    files: { size: document.querySelector('[data-field="files-size"]'), price: document.querySelector('[data-field="files-price"]') },
-    groups: { size: document.querySelector('[data-field="groups-size"]'), price: document.querySelector('[data-field="groups-price"]') },
-  };
+  const tierButtons = document.querySelectorAll('.bgb-tier-btn');
+  const periodButtons = document.querySelectorAll('.bgb-period-btn');
+  const field = (name) => document.querySelector(`[data-field="${name}"]`);
+  const plans = ['office', 'files', 'groups'];
+  const fields = Object.fromEntries(
+    plans.map((plan) => [
+      plan,
+      { size: field(`${plan}-size`), price: field(`${plan}-price`), caption: field(`${plan}-caption`) },
+    ]),
+  );
+  const topUpPrice = field('topup-price');
 
-  function setTier(index) {
-    const tier = tiers[index];
+  let tierIndex = defaultTier;
+  let periodIndex = defaultPeriod;
+
+  function markActive(buttons, activeIndex, key) {
     buttons.forEach((btn) => {
-      const isActive = Number(btn.dataset.tier) === index;
+      const isActive = Number(btn.dataset[key]) === activeIndex;
       btn.classList.toggle('btn-primary', isActive);
       btn.classList.toggle('btn-outline-dark', !isActive);
       btn.setAttribute('aria-pressed', String(isActive));
     });
-    fields.office.size.textContent = `${tier.label} per person`;
-    fields.office.price.textContent = formatPrice(tier.office.annual);
-    fields.files.size.textContent = `${tier.label} per person`;
-    fields.files.price.textContent = formatPrice(tier.files.annual);
-    fields.groups.size.textContent = `${tier.label} per person`;
-    fields.groups.price.textContent = formatPrice(tier.groups.annual);
   }
 
-  buttons.forEach((btn) => btn.addEventListener('click', () => setTier(Number(btn.dataset.tier))));
+  function render() {
+    const tier = tiers[tierIndex];
+    const period = periods[periodIndex];
+
+    markActive(tierButtons, tierIndex, 'tier');
+    markActive(periodButtons, periodIndex, 'period');
+
+    plans.forEach((plan) => {
+      fields[plan].size.textContent = `${tier.label} per person`;
+      fields[plan].price.textContent = formatPrice(tier[plan][period.key]);
+      fields[plan].caption.textContent = period.caption;
+    });
+
+    topUpPrice.textContent = formatPrice(topUp[period.key]);
+  }
+
+  tierButtons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      tierIndex = Number(btn.dataset.tier);
+      render();
+    }),
+  );
+
+  periodButtons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      periodIndex = Number(btn.dataset.period);
+      render();
+    }),
+  );
 </script>
