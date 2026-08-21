@@ -3,7 +3,7 @@ import {
   tiers,
   topUp,
   formatPrice,
-  annualSavingPercent,
+  ANNUAL_MONTHS_FREE,
   planKeys,
   planNames,
   yearlySaving,
@@ -19,16 +19,18 @@ const periods = [
   {
     key: 'annual',
     label: 'Annual',
-    badge: `Save ${annualSavingPercent}%`,
+    badge: `${ANNUAL_MONTHS_FREE} months free`,
     caption: 'Annual price, billed yearly.',
-    saving: (amount: string) => `You save ${amount} a year against paying monthly.`,
+    saving: (amount: string) =>
+      `You save ${amount} a year against paying monthly, near enough ${ANNUAL_MONTHS_FREE} months free.`,
   },
   {
     key: 'monthly',
     label: 'Monthly',
     badge: null,
-    caption: `Monthly price. Save ${annualSavingPercent}% on annual.`,
-    saving: (amount: string) => `Switch to annual billing and save ${amount} a year.`,
+    caption: `Monthly price. Annual gives you ${ANNUAL_MONTHS_FREE} months free.`,
+    saving: (amount: string) =>
+      `Switch to annual billing and save ${amount} a year, near enough ${ANNUAL_MONTHS_FREE} months free.`,
   },
 ];
 

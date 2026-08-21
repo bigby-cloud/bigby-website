@@ -64,14 +64,32 @@ export const planKeys: PlanKey[] = ['files', 'office', 'groups'];
 
 export const formatPrice = (value: number) => `£${value.toFixed(2)}`;
 
+const allPrices: Price[] = [...tiers.flatMap((tier) => planKeys.map((plan) => tier[plan])), topUp];
+
+/** Months of monthly billing that a year paid up front saves you. */
+const monthsFree = (price: Price) => ((price.monthly - price.annual) * 12) / price.monthly;
+
 /**
- * Every annual price is 5/6 of its monthly price, so a year up front costs the
- * same as ten months paid monthly. Worked out here rather than hard-coded so
- * the badge cannot drift away from the numbers above.
+ * Every monthly price is its annual price plus a fifth, rounded up to the
+ * penny, so paying for a year up front costs the same as ten months paid
+ * monthly. That is what lets one claim stand for every plan on the page.
+ *
+ * It only holds while the prices stay in step. If one of them is ever changed
+ * on its own, the claim quietly becomes wrong for the others, and nothing on
+ * the page would show it. So check it here and break the build instead.
  */
-export const annualSavingPercent = Math.round(
-  (1 - tiers[0].files.annual / tiers[0].files.monthly) * 100,
-);
+export const ANNUAL_MONTHS_FREE = 2;
+
+const drift = allPrices.map((price) => Math.abs(monthsFree(price) - ANNUAL_MONTHS_FREE));
+const worstDrift = Math.max(...drift);
+
+if (worstDrift > 0.05) {
+  throw new Error(
+    `Pricing: annual billing no longer saves ${ANNUAL_MONTHS_FREE} months on every plan ` +
+      `(worst case is off by ${worstDrift.toFixed(3)} months). Either bring the prices back ` +
+      `into step or change the saving claim in PricingTable.astro and drive.astro to match.`,
+  );
+}
 
 /** What a year on annual billing saves against twelve months paid monthly. */
 export const yearlySaving = (price: Price) => (price.monthly - price.annual) * 12;
