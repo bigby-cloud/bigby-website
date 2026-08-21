@@ -36,7 +36,7 @@ faqs:
   - question: "Will my data ever be moved outside the UK?"
     answer: "No. All data is stored on UK-based infrastructure and does not leave the UK. There are no overseas data centres, no cross-border replication for redundancy purposes, and no circumstances under which your files would be transferred to servers outside the UK. If that ever changed, you would be notified and given the option to export your data before any change took effect."
   - question: "How much does Bigby cost?"
-    answer: "Plans start at £3.99 per month for 100 GB of encrypted UK storage, billed annually. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For teams or families, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Full pricing is at bigby.cloud/pricing."
+    answer: "Plans start at £3.99 per month for 100 GB of encrypted UK storage on annual billing. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For teams or families, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/pricing."
 closingHeading: "UK cloud storage that means it, from a UK company that built it"
 closingSubhead: "Encrypted, UK-based cloud storage from £3.99 per month. No overseas jurisdiction, no data harvesting, no small print that undermines the promise."
 ---
