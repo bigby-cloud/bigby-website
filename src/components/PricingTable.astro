@@ -1,36 +1,108 @@
 ---
-// Prices per storage tier: [100GB, 500GB, 1TB], annual billing, per user/month.
-const tiers = [
-  { label: '100 GB', office: '£5.99', files: '£3.99', groups: '£4.99', badge: 'From £3.99' },
-  { label: '500 GB', office: '£9.99', files: '£6.99', groups: '£7.99', badge: null },
-  { label: '1 TB', office: '£12.99', files: '£9.99', groups: '£11.99', badge: null },
+import {
+  tiers,
+  topUp,
+  formatPrice,
+  ANNUAL_MONTHS_FREE,
+  planKeys,
+  planNames,
+  yearlySaving,
+  formatSaving,
+} from '../data/pricing';
+
+// The table opens on 500 GB, the middle size, and on annual billing. Annual is
+// the price we lead with, so it stays the default no matter what else changes.
+const defaultTier = 1;
+const defaultPeriod = 0;
+
+const periods = [
+  {
+    key: 'annual',
+    label: 'Annual',
+    badge: `${ANNUAL_MONTHS_FREE} months free`,
+    caption: 'Annual price, billed yearly.',
+    saving: (amount: string) =>
+      `You save ${amount} a year against paying monthly, near enough ${ANNUAL_MONTHS_FREE} months free.`,
+  },
+  {
+    key: 'monthly',
+    label: 'Monthly',
+    badge: null,
+    caption: `Monthly price. Annual gives you ${ANNUAL_MONTHS_FREE} months free.`,
+    saving: (amount: string) =>
+      `Switch to annual billing and save ${amount} a year, near enough ${ANNUAL_MONTHS_FREE} months free.`,
+  },
 ];
+
+// Every state the two toggles can produce, worked out and formatted here so the
+// browser script only swaps text and never repeats the pricing arithmetic.
+const views = tiers.map((tier) =>
+  periods.map((period) => ({
+    size: `${tier.label} per person`,
+    office: formatPrice(tier.office[period.key]),
+    files: formatPrice(tier.files[period.key]),
+    groups: formatPrice(tier.groups[period.key]),
+    topUp: formatPrice(topUp[period.key]),
+    caption: period.caption,
+    saving: period.saving(formatSaving(yearlySaving(tier.office))),
+  })),
+);
+
+const defaultView = views[defaultTier][defaultPeriod];
 ---
 
 <div id="bgb-pricing">
-  <div class="mb-4">
-    <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
-    <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
-      {
-        tiers.map((tier, i) => (
-          <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
-            <span
-              class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !tier.badge }]}
-              style="font-size: 0.75rem; padding-block: 0.4em;"
-            >
-              {tier.badge ?? 'placeholder'}
-            </span>
-            <button
-              type="button"
-              class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === 1 ? 'btn-primary' : 'btn-outline-dark']}
-              data-tier={i}
-              aria-pressed={i === 1 ? 'true' : 'false'}
-            >
-              {tier.label}
-            </button>
-          </div>
-        ))
-      }
+  <div class="row g-3 g-lg-4 mb-4">
+    <div class="col-lg-7">
+      <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
+      <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
+        {
+          tiers.map((tier, i) => (
+            <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
+              <span
+                class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !tier.badge }]}
+                style="font-size: 0.75rem; padding-block: 0.4em;"
+              >
+                {tier.badge ?? 'placeholder'}
+              </span>
+              <button
+                type="button"
+                class:list={['btn btn-lg w-100 fw-medium bgb-tier-btn', i === defaultTier ? 'btn-primary' : 'btn-outline-dark']}
+                data-tier={i}
+                aria-pressed={i === defaultTier ? 'true' : 'false'}
+              >
+                {tier.label}
+              </button>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your billing:</span>
+      <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your billing period">
+        {
+          periods.map((period, i) => (
+            <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
+              <span
+                class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !period.badge }]}
+                style="font-size: 0.75rem; padding-block: 0.4em;"
+              >
+                {period.badge ?? 'placeholder'}
+              </span>
+              <button
+                type="button"
+                class:list={['btn btn-lg w-100 fw-medium bgb-period-btn', i === defaultPeriod ? 'btn-primary' : 'btn-outline-dark']}
+                data-period={i}
+                aria-pressed={i === defaultPeriod ? 'true' : 'false'}
+              >
+                {period.label}
+              </button>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 
@@ -41,32 +113,45 @@ const tiers = [
           <span class="badge text-bg-primary align-self-start mb-2">★ Our best all-rounder</span>
           <h3 class="card-title">Office</h3>
           <p class="card-subtitle text-white-50 mb-3">Files and productivity, together.</p>
-          <div class="row mb-4">
+          <div class="row my-auto">
             <div class="col-6">
               <div class="text-uppercase small text-white-50 mb-2">Standard features</div>
-              <ul class="list-unstyled small">
+              <ul class="list-unstyled bgb-feature-list">
                 <li>✓ Online file storage</li>
                 <li>✓ Shared spaces</li>
                 <li>✓ Share with anyone on Bigby.drive</li>
                 <li>✓ Encryption in transit and at rest</li>
+                <li>✓ Files stored on UK servers</li>
+                <li>✓ Desktop sync</li>
                 <li>✓ WebDAV</li>
               </ul>
             </div>
             <div class="col-6">
               <div class="text-uppercase small text-white-50 mb-2">Office + collaboration</div>
-              <ul class="list-unstyled small">
+              <ul class="list-unstyled bgb-feature-list">
                 <li>✓ Documents</li>
                 <li>✓ Spreadsheets</li>
                 <li>✓ Presentations</li>
                 <li>✓ Graphics</li>
+                <li>✓ Editing in your browser</li>
+                <li>✓ Real-time collaborative editing</li>
+                <li>✓ Individual access control</li>
               </ul>
             </div>
           </div>
-          <div class="mt-auto d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
+          <div class="pt-3">
+            <div class="d-flex align-items-center gap-3 rounded-3 bg-black bg-opacity-50 px-3 py-3">
+              <span class="fs-4 lh-1" aria-hidden="true">★</span>
+              <span data-field="office-saving">
+                {defaultView.saving}
+              </span>
+            </div>
+          </div>
+          <div class="mt-3 d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
             <div>
-              <div class="small text-white-50" data-field="office-size">500 GB per person</div>
-              <div><span class="fs-3" data-field="office-price">£9.99</span><span class="text-white-50">/month</span></div>
-              <div class="small text-white-50">Annual price, billed yearly.</div>
+              <div class="small text-white-50" data-field="office-size">{defaultView.size}</div>
+              <div><span class="fs-3" data-field="office-price">{defaultView.office}</span><span class="text-white-50">/month</span></div>
+              <div class="small text-white-50" data-field="office-caption">{defaultView.caption}</div>
             </div>
             <a class="btn btn-light" href="/waiting-list/">Join the waiting list</a>
           </div>
@@ -86,9 +171,9 @@ const tiers = [
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="files-size">500 GB per person</div>
-            <div><span class="fs-4" data-field="files-price">£6.99</span><span class="text-body-secondary">/month</span></div>
-            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <div class="small text-body-secondary" data-field="files-size">{defaultView.size}</div>
+            <div><span class="fs-4" data-field="files-price">{defaultView.files}</span><span class="text-body-secondary">/month</span></div>
+            <div class="small text-body-secondary mb-3" data-field="files-caption">{defaultView.caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -106,9 +191,9 @@ const tiers = [
           </ul>
           <hr />
           <div class="mt-auto">
-            <div class="small text-body-secondary" data-field="groups-size">500 GB per person</div>
-            <div><span class="fs-4" data-field="groups-price">£7.99</span><span class="text-body-secondary">/user/mo</span></div>
-            <div class="small text-body-secondary mb-3">Annual price, billed yearly.</div>
+            <div class="small text-body-secondary" data-field="groups-size">{defaultView.size}</div>
+            <div><span class="fs-4" data-field="groups-price">{defaultView.groups}</span><span class="text-body-secondary">/user/mo</span></div>
+            <div class="small text-body-secondary mb-3" data-field="groups-caption">{defaultView.caption}</div>
             <a class="btn btn-outline-primary w-100" href="/waiting-list/">Join the waiting list</a>
           </div>
         </div>
@@ -117,34 +202,110 @@ const tiers = [
   </div>
 
   <div class="alert alert-light border mt-4">
-    <strong>Need more room?</strong> Add 100 GB per person for <strong>£1.49/month</strong>. Available on any plan, no
+    <strong>Need more room?</strong> Add 100 GB per person for <strong><span data-field="topup-price">{defaultView.topUp}</span>/month</strong>. Available on any plan, no
     tier change needed.
   </div>
+
+  {/*
+    The cards above show one price at a time, which means anything reading the
+    page without clicking through the toggles only ever sees a single figure.
+    This table lists every price in the page source instead, so search engines
+    and AI assistants can quote the full range without running our JavaScript.
+  */}
+  <details class="mt-4">
+    <summary class="fw-medium">See every plan and price in one table</summary>
+    <div class="table-responsive mt-3">
+      <table class="table table-sm align-middle mb-0">
+        <caption>
+          Bigby.drive prices in GBP, per person, per month. Annual figures are the monthly equivalent when you pay for
+          a year up front. Monthly figures are what you pay when you pay month to month.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Plan</th>
+            <th scope="col">Storage</th>
+            <th scope="col">Annual (per month)</th>
+            <th scope="col">Monthly</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            planKeys.map((plan) =>
+              tiers.map((tier) => (
+                <tr>
+                  <th scope="row" class="fw-normal">{planNames[plan]}</th>
+                  <td>{tier.label}</td>
+                  <td>{formatPrice(tier[plan].annual)}</td>
+                  <td>{formatPrice(tier[plan].monthly)}</td>
+                </tr>
+              )),
+            )
+          }
+          <tr>
+            <th scope="row" class="fw-normal">Storage top-up</th>
+            <td>{topUp.label}</td>
+            <td>{formatPrice(topUp.annual)}</td>
+            <td>{formatPrice(topUp.monthly)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
 </div>
 
-<script define:vars={{ tiers }}>
-  const buttons = document.querySelectorAll('.bgb-tier-btn');
-  const fields = {
-    office: { size: document.querySelector('[data-field="office-size"]'), price: document.querySelector('[data-field="office-price"]') },
-    files: { size: document.querySelector('[data-field="files-size"]'), price: document.querySelector('[data-field="files-price"]') },
-    groups: { size: document.querySelector('[data-field="groups-size"]'), price: document.querySelector('[data-field="groups-price"]') },
-  };
+<script define:vars={{ views, defaultTier, defaultPeriod }}>
+  const tierButtons = document.querySelectorAll('.bgb-tier-btn');
+  const periodButtons = document.querySelectorAll('.bgb-period-btn');
+  const field = (name) => document.querySelector(`[data-field="${name}"]`);
+  const plans = ['office', 'files', 'groups'];
+  const fields = Object.fromEntries(
+    plans.map((plan) => [
+      plan,
+      { size: field(`${plan}-size`), price: field(`${plan}-price`), caption: field(`${plan}-caption`) },
+    ]),
+  );
+  const topUpPrice = field('topup-price');
+  const officeSaving = field('office-saving');
 
-  function setTier(index) {
-    const tier = tiers[index];
+  let tierIndex = defaultTier;
+  let periodIndex = defaultPeriod;
+
+  function markActive(buttons, activeIndex, key) {
     buttons.forEach((btn) => {
-      const isActive = Number(btn.dataset.tier) === index;
+      const isActive = Number(btn.dataset[key]) === activeIndex;
       btn.classList.toggle('btn-primary', isActive);
       btn.classList.toggle('btn-outline-dark', !isActive);
       btn.setAttribute('aria-pressed', String(isActive));
     });
-    fields.office.size.textContent = `${tier.label} per person`;
-    fields.office.price.textContent = tier.office;
-    fields.files.size.textContent = `${tier.label} per person`;
-    fields.files.price.textContent = tier.files;
-    fields.groups.size.textContent = `${tier.label} per person`;
-    fields.groups.price.textContent = tier.groups;
   }
 
-  buttons.forEach((btn) => btn.addEventListener('click', () => setTier(Number(btn.dataset.tier))));
+  function render() {
+    const view = views[tierIndex][periodIndex];
+
+    markActive(tierButtons, tierIndex, 'tier');
+    markActive(periodButtons, periodIndex, 'period');
+
+    plans.forEach((plan) => {
+      fields[plan].size.textContent = view.size;
+      fields[plan].price.textContent = view[plan];
+      fields[plan].caption.textContent = view.caption;
+    });
+
+    topUpPrice.textContent = view.topUp;
+    officeSaving.textContent = view.saving;
+  }
+
+  tierButtons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      tierIndex = Number(btn.dataset.tier);
+      render();
+    }),
+  );
+
+  periodButtons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      periodIndex = Number(btn.dataset.period);
+      render();
+    }),
+  );
 </script>

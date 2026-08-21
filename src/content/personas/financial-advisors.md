@@ -36,7 +36,7 @@ faqs:
   - question: "I work as a sole adviser. What plan is most suitable?"
     answer: "The Storage and Office plans are designed for individual users with no minimum commitment. Most sole advisers find the 100 GB Storage plan more than sufficient for client records, suitability reports, and correspondence. The Office plan adds document editing within your encrypted workspace, which some advisers find useful for drafting suitability letters and client-facing documents. Storage can be topped up at any point."
   - question: "We are a small advice firm with several advisers. Is there a plan for teams?"
-    answer: "Yes. The Group plan provides shared encrypted storage and document collaboration for teams of three or more, with per-user access controls. Each adviser accesses their own client files; shared resources such as firm templates, compliance documents, and procedures can be made available to the full team. The plan is priced per user from £4.99 per month on annual billing."
+    answer: "Yes. The Group plan provides shared encrypted storage and document collaboration for teams of three or more, with per-user access controls. Each adviser accesses their own client files; shared resources such as firm templates, compliance documents, and procedures can be made available to the full team. The plan is priced per user from £4.99 per month on annual billing, or £5.99 per month if you pay monthly."
 closingHeading: "Storage that meets the standard your clients’ financial plans deserve"
 closingSubhead: "Private, encrypted, UK-based cloud storage from £3.99 per month. Built for regulated advisers who understand that how they store client data is as much a part of the service as the advice itself."
 ---

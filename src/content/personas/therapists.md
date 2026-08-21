@@ -32,7 +32,7 @@ faqs:
   - question: "What happens if Bigby receives a request for my data?"
     answer: "Bigby is a UK company subject to UK law. We may be required to comply with lawful UK court orders or other legal demands. We do not hold data under US jurisdiction and are not subject to the CLOUD Act. We will challenge any demands we consider unlawful and will notify users where the law permits. Bigby provides meaningful improvement over consumer cloud storage for day-to-day record storage, but for specific advice on how legal obligations interact with your professional duties, we recommend consulting a qualified adviser."
   - question: "I work as part of a small practice. Is there a plan for teams?"
-    answer: "Yes. The Group plan is designed for small teams of three or more, with shared encrypted storage and document collaboration built in. Each user accesses only what they need, and all files remain encrypted throughout. It is priced per user from £4.99 per month on annual billing."
+    answer: "Yes. The Group plan is designed for small teams of three or more, with shared encrypted storage and document collaboration built in. Each user accesses only what they need, and all files remain encrypted throughout. It is priced per user from £4.99 per month on annual billing, or £5.99 per month if you pay monthly."
   - question: "Is Bigby suitable for a sole practitioner working from home?"
     answer: "The Storage and Office plans are designed for individual users, with no minimum commitment beyond a single account. Many sole practitioners find the 100 GB Storage plan more than sufficient for client records and correspondence, and storage can be topped up if needed."
   - question: "How does Bigby make money if it doesn't sell data?"

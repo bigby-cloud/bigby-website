@@ -36,7 +36,7 @@ faqs:
   - question: "What if I forget my password?"
     answer: "Bigby provides standard account recovery options. If you forget your password, you can reset it via your registered email address. Unlike end-to-end encrypted services, you are not at risk of being permanently locked out of your files due to a lost local key. If you need help recovering access, our support team can assist."
   - question: "How does Bigby's pricing work?"
-    answer: "Plans start at £3.99 per month for 100 GB, billed annually. There is no free tier, no advertising, and no data monetisation. The Office plan adds document and spreadsheet collaboration from £5.99 per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Full pricing is at bigby.cloud/pricing."
+    answer: "Plans start at £3.99 per month for 100 GB on annual billing. There is no free tier, no advertising, and no data monetisation. The Office plan adds document and spreadsheet collaboration from £5.99 per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is at bigby.cloud/drive/#pricing."
 closingHeading: "Storage with no commercial reason to read, scan, or share what you store"
 closingSubhead: "Encrypted, UK-based cloud storage from £3.99 per month. Built for people who have already seen what happens when a platform treats their data as a product."
 ---
