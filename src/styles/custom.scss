@@ -98,3 +98,10 @@ $enable-shadows: false;
     border-bottom-width: $border-width * 2;
   }
 }
+
+// The Office plan card is the widest of the three and carries the longest
+// feature lists, so its items get a little more room to breathe than the
+// cramped .small they used to sit at.
+.bgb-feature-list li + li {
+  margin-top: 0.35rem;
+}

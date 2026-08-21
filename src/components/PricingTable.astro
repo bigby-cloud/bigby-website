@@ -1,14 +1,38 @@
 ---
-import { tiers, topUp, formatPrice, annualSavingPercent, planKeys, planNames } from '../data/pricing';
+import {
+  tiers,
+  topUp,
+  formatPrice,
+  annualSavingPercent,
+  planKeys,
+  planNames,
+  yearlySaving,
+  formatSaving,
+} from '../data/pricing';
 
 // The table opens on 500 GB, the middle size, and on annual billing. Annual is
 // the price we lead with, so it stays the default no matter what else changes.
 const defaultTier = 1;
 
 const periods = [
-  { key: 'annual', label: 'Annual', badge: `Save ${annualSavingPercent}%`, caption: 'Annual price, billed yearly.' },
-  { key: 'monthly', label: 'Monthly', badge: null, caption: `Monthly price. Save ${annualSavingPercent}% on annual.` },
+  {
+    key: 'annual',
+    label: 'Annual',
+    badge: `Save ${annualSavingPercent}%`,
+    caption: 'Annual price, billed yearly.',
+    saving: 'You save SAVING a year against paying monthly.',
+  },
+  {
+    key: 'monthly',
+    label: 'Monthly',
+    badge: null,
+    caption: `Monthly price. Save ${annualSavingPercent}% on annual.`,
+    saving: 'Switch to annual billing and save SAVING a year.',
+  },
 ];
+
+const savingLine = (period: (typeof periods)[number], saving: number) =>
+  period.saving.replace('SAVING', formatSaving(saving));
 const defaultPeriod = 0;
 ---
 
@@ -74,28 +98,41 @@ const defaultPeriod = 0;
           <span class="badge text-bg-primary align-self-start mb-2">★ Our best all-rounder</span>
           <h3 class="card-title">Office</h3>
           <p class="card-subtitle text-white-50 mb-3">Files and productivity, together.</p>
-          <div class="row mb-4">
+          <div class="row my-auto">
             <div class="col-6">
               <div class="text-uppercase small text-white-50 mb-2">Standard features</div>
-              <ul class="list-unstyled small">
+              <ul class="list-unstyled bgb-feature-list">
                 <li>✓ Online file storage</li>
                 <li>✓ Shared spaces</li>
                 <li>✓ Share with anyone on Bigby.drive</li>
                 <li>✓ Encryption in transit and at rest</li>
+                <li>✓ Files stored on UK servers</li>
+                <li>✓ Desktop sync</li>
                 <li>✓ WebDAV</li>
               </ul>
             </div>
             <div class="col-6">
               <div class="text-uppercase small text-white-50 mb-2">Office + collaboration</div>
-              <ul class="list-unstyled small">
+              <ul class="list-unstyled bgb-feature-list">
                 <li>✓ Documents</li>
                 <li>✓ Spreadsheets</li>
                 <li>✓ Presentations</li>
                 <li>✓ Graphics</li>
+                <li>✓ Editing in your browser</li>
+                <li>✓ Real-time collaborative editing</li>
+                <li>✓ Individual access control</li>
               </ul>
             </div>
           </div>
-          <div class="mt-auto d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
+          <div class="pt-3">
+            <div class="d-flex align-items-center gap-3 rounded-3 bg-black bg-opacity-50 px-3 py-3">
+              <span class="fs-4 lh-1" aria-hidden="true">★</span>
+              <span data-field="office-saving">
+                {savingLine(periods[defaultPeriod], yearlySaving(tiers[defaultTier].office))}
+              </span>
+            </div>
+          </div>
+          <div class="mt-3 d-flex justify-content-between align-items-end border-top border-secondary pt-3 flex-wrap gap-3">
             <div>
               <div class="small text-white-50" data-field="office-size">{tiers[defaultTier].label} per person</div>
               <div><span class="fs-3" data-field="office-price">{formatPrice(tiers[defaultTier].office[periods[defaultPeriod].key])}</span><span class="text-white-50">/month</span></div>
@@ -215,6 +252,10 @@ const defaultPeriod = 0;
     ]),
   );
   const topUpPrice = field('topup-price');
+  const officeSaving = field('office-saving');
+
+  const formatSaving = (value) =>
+    Number.isInteger(value) ? `\u00a3${value}` : `\u00a3${value.toFixed(2)}`;
 
   let tierIndex = defaultTier;
   let periodIndex = defaultPeriod;
@@ -242,6 +283,9 @@ const defaultPeriod = 0;
     });
 
     topUpPrice.textContent = formatPrice(topUp[period.key]);
+
+    const saving = (tier.office.monthly - tier.office.annual) * 12;
+    officeSaving.textContent = period.saving.replace('SAVING', formatSaving(saving));
   }
 
   tierButtons.forEach((btn) =>

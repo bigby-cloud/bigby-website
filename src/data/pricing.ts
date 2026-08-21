@@ -72,3 +72,10 @@ export const formatPrice = (value: number) => `£${value.toFixed(2)}`;
 export const annualSavingPercent = Math.round(
   (1 - tiers[0].files.annual / tiers[0].files.monthly) * 100,
 );
+
+/** What a year on annual billing saves against twelve months paid monthly. */
+export const yearlySaving = (price: Price) => (price.monthly - price.annual) * 12;
+
+/** Whole pounds lose the trailing zeroes, so £24.00 reads as £24. */
+export const formatSaving = (value: number) =>
+  Number.isInteger(value) ? `£${value}` : `£${value.toFixed(2)}`;
