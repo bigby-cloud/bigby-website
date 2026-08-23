@@ -105,3 +105,24 @@ $enable-shadows: false;
 .bgb-feature-list li + li {
   margin-top: 0.35rem;
 }
+
+// The billing switch sits next to the storage buttons, so it gets the same
+// height as a .btn-lg to keep the two controls on one line.
+.bgb-period-switch {
+  min-height: calc(#{$btn-padding-y-lg * 2 + $btn-font-size-lg * $btn-line-height} + #{$border-width * 2});
+  padding-inline: $btn-padding-x-lg;
+  font-size: $btn-font-size-lg;
+
+  .form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+
+  // Both words either side of the switch flip the billing period, so they
+  // need to look as clickable as the switch itself.
+  .bgb-period-label {
+    cursor: pointer;
+    user-select: none;
+  }
+}

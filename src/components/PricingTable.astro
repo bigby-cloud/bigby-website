@@ -10,10 +10,14 @@ import {
   formatSaving,
 } from '../data/pricing';
 
+// The billing switch is a two-state control: off is monthly, on is annual.
+const ANNUAL = 0;
+const MONTHLY = 1;
+
 // The table opens on 500 GB, the middle size, and on annual billing. Annual is
 // the price we lead with, so it stays the default no matter what else changes.
 const defaultTier = 1;
-const defaultPeriod = 0;
+const defaultPeriod = ANNUAL;
 
 const periods = [
   {
@@ -49,6 +53,11 @@ const views = tiers.map((tier) =>
 );
 
 const defaultView = views[defaultTier][defaultPeriod];
+
+// The script applies these too, but rendering them up front means the chosen
+// side reads as chosen before any JavaScript runs.
+const periodLabelClasses = (i: number) =>
+  i === defaultPeriod ? 'fw-semibold text-body-emphasis' : 'text-body-secondary';
 ---
 
 <div id="bgb-pricing">
@@ -81,27 +90,33 @@ const defaultView = views[defaultTier][defaultPeriod];
 
     <div class="col-lg-5">
       <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your billing:</span>
-      <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your billing period">
-        {
-          periods.map((period, i) => (
-            <div class="d-flex flex-column align-items-stretch flex-fill" style="min-width: 0;">
-              <span
-                class:list={['badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center', { invisible: !period.badge }]}
-                style="font-size: 0.75rem; padding-block: 0.4em;"
-              >
-                {period.badge ?? 'placeholder'}
-              </span>
-              <button
-                type="button"
-                class:list={['btn btn-lg w-100 fw-medium bgb-period-btn', i === defaultPeriod ? 'btn-primary' : 'btn-outline-dark']}
-                data-period={i}
-                aria-pressed={i === defaultPeriod ? 'true' : 'false'}
-              >
-                {period.label}
-              </button>
-            </div>
-          ))
-        }
+      <div class="d-flex flex-column align-items-stretch">
+        <span
+          class="badge rounded-pill text-bg-primary mb-1 fw-semibold align-self-center"
+          style="font-size: 0.75rem; padding-block: 0.4em;"
+          id="bgb-period-badge"
+        >
+          {periods[ANNUAL].badge}
+        </span>
+        <div class="form-check form-switch d-flex align-items-center justify-content-center gap-3 ps-0 mb-0 border rounded bgb-period-switch">
+          <span class:list={['bgb-period-label', periodLabelClasses(MONTHLY)]} data-period-label={MONTHLY}>
+            {periods[MONTHLY].label}
+          </span>
+          <input
+            class="form-check-input m-0 flex-shrink-0"
+            type="checkbox"
+            role="switch"
+            id="bgb-period-switch"
+            checked={defaultPeriod === ANNUAL}
+          />
+          <label
+            class:list={['form-check-label bgb-period-label', periodLabelClasses(ANNUAL)]}
+            data-period-label={ANNUAL}
+            for="bgb-period-switch"
+          >
+            {periods[ANNUAL].label}
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -253,9 +268,11 @@ const defaultView = views[defaultTier][defaultPeriod];
   </details>
 </div>
 
-<script define:vars={{ views, defaultTier, defaultPeriod }}>
+<script define:vars={{ views, defaultTier, defaultPeriod, ANNUAL, MONTHLY }}>
   const tierButtons = document.querySelectorAll('.bgb-tier-btn');
-  const periodButtons = document.querySelectorAll('.bgb-period-btn');
+  const periodSwitch = document.getElementById('bgb-period-switch');
+  const periodBadge = document.getElementById('bgb-period-badge');
+  const periodLabels = document.querySelectorAll('.bgb-period-label');
   const field = (name) => document.querySelector(`[data-field="${name}"]`);
   const plans = ['office', 'files', 'groups'];
   const fields = Object.fromEntries(
@@ -283,7 +300,16 @@ const defaultView = views[defaultTier][defaultPeriod];
     const view = views[tierIndex][periodIndex];
 
     markActive(tierButtons, tierIndex, 'tier');
-    markActive(periodButtons, periodIndex, 'period');
+
+    // Only the annual side carries a badge, so it hides rather than disappears
+    // and the switch stays put when you flip between the two.
+    periodBadge.classList.toggle('invisible', periodIndex !== ANNUAL);
+    periodLabels.forEach((label) => {
+      const isActive = Number(label.dataset.periodLabel) === periodIndex;
+      label.classList.toggle('fw-semibold', isActive);
+      label.classList.toggle('text-body-emphasis', isActive);
+      label.classList.toggle('text-body-secondary', !isActive);
+    });
 
     plans.forEach((plan) => {
       fields[plan].size.textContent = view.size;
@@ -302,9 +328,18 @@ const defaultView = views[defaultTier][defaultPeriod];
     }),
   );
 
-  periodButtons.forEach((btn) =>
-    btn.addEventListener('click', () => {
-      periodIndex = Number(btn.dataset.period);
+  periodSwitch.addEventListener('change', () => {
+    periodIndex = periodSwitch.checked ? ANNUAL : MONTHLY;
+    render();
+  });
+
+  // The labels either side of the switch read as part of the control, so a
+  // click on one picks that period rather than doing nothing.
+  periodLabels.forEach((label) =>
+    label.addEventListener('click', (event) => {
+      event.preventDefault();
+      periodIndex = Number(label.dataset.periodLabel);
+      periodSwitch.checked = periodIndex === ANNUAL;
       render();
     }),
   );
