@@ -62,7 +62,7 @@ const periodLabelClasses = (i: number) =>
 
 <div id="bgb-pricing">
   <div class="row g-3 g-lg-4 mb-4">
-    <div class="col-lg-7">
+    <div class="col-lg-9">
       <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your storage:</span>
       <div class="d-flex gap-2 gap-sm-3 w-100" role="group" aria-label="Choose your storage size">
         {
@@ -88,7 +88,7 @@ const periodLabelClasses = (i: number) =>
       </div>
     </div>
 
-    <div class="col-lg-5">
+    <div class="col-lg-3">
       <span class="text-body-emphasis fw-medium fst-italic d-block mb-2">Choose your billing:</span>
       <div class="d-flex flex-column align-items-stretch">
         <span
@@ -98,7 +98,7 @@ const periodLabelClasses = (i: number) =>
         >
           {periods[ANNUAL].badge}
         </span>
-        <div class="form-check form-switch d-flex align-items-center justify-content-center gap-3 ps-0 mb-0 border rounded bgb-period-switch">
+        <div class="form-check form-switch d-flex align-items-center justify-content-center mb-0 border rounded bgb-period-switch">
           <span class:list={['bgb-period-label', periodLabelClasses(MONTHLY)]} data-period-label={MONTHLY}>
             {periods[MONTHLY].label}
           </span>

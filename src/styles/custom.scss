@@ -107,15 +107,17 @@ $enable-shadows: false;
 }
 
 // The billing switch sits next to the storage buttons, so it gets the same
-// height as a .btn-lg to keep the two controls on one line.
+// height as a .btn-lg to keep the two controls on one line. It keeps the base
+// font size rather than the button one: the column is only three wide, and at
+// the lg breakpoint there is not room for both words at 1.25rem.
 .bgb-period-switch {
   min-height: calc(#{$btn-padding-y-lg * 2 + $btn-font-size-lg * $btn-line-height} + #{$border-width * 2});
-  padding-inline: $btn-padding-x-lg;
-  font-size: $btn-font-size-lg;
+  padding-inline: 0.75rem;
+  gap: 0.75rem;
 
   .form-check-input {
-    width: 3rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 1.25rem;
     cursor: pointer;
   }
 
