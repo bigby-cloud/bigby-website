@@ -98,3 +98,33 @@ $enable-shadows: false;
     border-bottom-width: $border-width * 2;
   }
 }
+
+// The Office plan card is the widest of the three and carries the longest
+// feature lists, so its items get a little more room to breathe than the
+// cramped .small they used to sit at.
+.bgb-feature-list li + li {
+  margin-top: 0.35rem;
+}
+
+// The billing switch sits next to the storage buttons, so it gets the same
+// height as a .btn-lg to keep the two controls on one line. It keeps the base
+// font size rather than the button one: the column is only three wide, and at
+// the lg breakpoint there is not room for both words at 1.25rem.
+.bgb-period-switch {
+  min-height: calc(#{$btn-padding-y-lg * 2 + $btn-font-size-lg * $btn-line-height} + #{$border-width * 2});
+  padding-inline: 0.75rem;
+  gap: 0.75rem;
+
+  .form-check-input {
+    width: 2.5rem;
+    height: 1.25rem;
+    cursor: pointer;
+  }
+
+  // Both words either side of the switch flip the billing period, so they
+  // need to look as clickable as the switch itself.
+  .bgb-period-label {
+    cursor: pointer;
+    user-select: none;
+  }
+}

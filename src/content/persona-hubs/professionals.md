@@ -54,7 +54,7 @@ faqs:
   - question: "Is Bigby GDPR compliant?"
     answer: "Yes. Bigby stores all data on UK infrastructure, which means UK GDPR applies. We do not access or process the contents of your files. Our data processing terms are written to be clear and straightforward. For professionals with obligations as data controllers, Bigby is designed to support rather than complicate those responsibilities. We would always recommend reviewing your full data handling arrangements with a qualified adviser."
   - question: "How much does Bigby cost?"
-    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage, billed annually. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For teams of three or more, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Full pricing is available at bigby.cloud/drive."
+    answer: "Plans start at £3.99 per month for 100 GB of encrypted storage on annual billing. The Office plan adds document and spreadsheet collaboration from £5.99 per month. For teams of three or more, the Group plan starts from £4.99 per user per month. Additional storage can be added to any plan for £1.49 per month per 100 GB. Monthly billing is available on every plan, and paying for a year up front gets you two months free. Full pricing is available at bigby.cloud/drive."
 closingHeading: "Your data belongs to you. Full stop."
 closingSubhead: "Private, encrypted, UK-based cloud storage from £3.99 per month. No data mining, no AI training, no compromise."
 ---

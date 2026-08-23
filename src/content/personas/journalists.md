@@ -30,7 +30,7 @@ faqs:
   - question: "Can I store leaked or sensitive documents securely?"
     answer: "Yes. Documents, research, and sensitive material can be stored and accessed on Bigby. We do not scan or access the contents of stored files, and we have no business model that requires us to. Your files are stored in encrypted form on UK servers and are not subject to US jurisdiction or the CLOUD Act."
   - question: "I work with a small team of researchers. Is there a plan for that?"
-    answer: "Yes. The Group plan provides shared encrypted storage and document collaboration for teams of three or more. Each member accesses only what they need, and all files remain encrypted throughout. It is priced per user from £4.99 per month on annual billing and is well suited to small editorial or research teams who need to collaborate without compromising on security."
+    answer: "Yes. The Group plan provides shared encrypted storage and document collaboration for teams of three or more. Each member accesses only what they need, and all files remain encrypted throughout. It is priced per user from £4.99 per month on annual billing, or £5.99 per month if you pay monthly, and is well suited to small editorial or research teams who need to collaborate without compromising on security."
   - question: "Does Bigby work with tools I already use?"
     answer: "Bigby supports WebDAV, an open standard compatible with a wide range of applications and operating systems. If your current workflow involves syncing or accessing files from desktop software, there is a good chance it will work alongside Bigby without disruption. We are happy to answer specifics if you have a particular setup in mind."
   - question: "Is Bigby suitable for a freelance journalist working alone?"

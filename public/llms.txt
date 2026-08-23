@@ -10,14 +10,21 @@ Key facts:
 - Subscription funded and independent, with no venture capital. The business model does not depend on user data.
 - WebDAV supported, so files can always be exported with standard tools. No lock-in and no export fees.
 - Built on an open source stack.
-- Paid plans only, billed annually, priced per user per month in GBP. Available on web and desktop.
+- Paid plans only, priced per user per month in GBP. Annual or monthly billing, with annual working out at two months free. Available on web and desktop.
 
 Plans:
 
-- Storage (files only): 100GB at £3.99, 500GB at £6.99, 1TB at £9.99 per user per month.
-- Office (storage plus Collabora docs, spreadsheets and presentations): 100GB at £5.99, 500GB at £9.99, 1TB at £12.99 per user per month.
-- Group (Office tier at bulk pricing, minimum 3 users): 100GB at £4.99, 500GB at £7.99, 1TB at £11.99 per user per month.
-- Storage top-up: extra 100GB for £1.49 per month on any plan.
+All prices are per user per month in GBP. The annual figure is what each month
+costs when a year is paid up front; the monthly figure is what each month costs
+paying month to month. Annual billing costs the same as ten months of monthly
+billing, so a year up front is two months free.
+
+- Just Files, also called the Storage plan (files only, no collaboration): 100GB at £3.99 annual or £4.79 monthly, 500GB at £6.99 annual or £8.39 monthly, 1TB at £9.99 annual or £11.99 monthly.
+- Office (storage plus Collabora docs, spreadsheets and presentations): 100GB at £5.99 annual or £7.19 monthly, 500GB at £9.99 annual or £11.99 monthly, 1TB at £12.99 annual or £15.59 monthly.
+- Group (Office tier at bulk pricing, minimum 3 users): 100GB at £4.99 annual or £5.99 monthly, 500GB at £7.99 annual or £9.59 monthly, 1TB at £11.99 annual or £14.39 monthly.
+- Storage top-up: extra 100GB for £1.49 annual or £1.79 monthly, on any plan.
+
+Full price list: https://bigby.cloud/drive/#pricing
 
 ## Product
 
