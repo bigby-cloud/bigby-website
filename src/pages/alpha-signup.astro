@@ -16,7 +16,7 @@ const thanksUrl = new URL('/alpha-signup/thanks/', Astro.site);
     <section class="py-5">
       <div class="container" style="max-width: 560px;">
         <h1 class="mb-4">Alpha tester sign up</h1>
-        <p><strong>Important:</strong> The Bigby.drive Alpha is currently only open to pre-approved users. If you have stumbled across this page without talking to us, hi! We appreciate your enthusiasm! Please drop us your details via the Waiting List and we'll be in touch ASAP.</p>
+        <p><strong>Important:</strong> The Bigby.drive Alpha is currently only open to pre-approved users. If you have stumbled across this page without talking to us, hi! We appreciate your enthusiasm! Please drop us your details via the <a href="/waiting-list/">Waiting List</a> and we'll be in touch ASAP.</p>
         <form action="https://formspree.io/f/xaeydzpj" method="POST">
           <input type="hidden" name="_next" value={thanksUrl} />
           <div class="mb-3">
