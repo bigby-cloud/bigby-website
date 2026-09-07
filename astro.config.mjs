@@ -5,7 +5,14 @@ import sitemap from '@astrojs/sitemap';
 
 // Pages that pass noindex to Base.astro. Keep this list in step with them so we
 // never ask search engines to crawl a page we have told them to ignore.
-const noindexPaths = ['/report-an-issue/', '/report-an-issue/thanks/', '/waiting-list/thanks/', '/404/'];
+const noindexPaths = [
+  '/report-an-issue/',
+  '/report-an-issue/thanks/',
+  '/waiting-list/thanks/',
+  '/alpha-signup/',
+  '/alpha-signup/thanks/',
+  '/404/'
+];
 
 // https://astro.build/config
 export default defineConfig({
