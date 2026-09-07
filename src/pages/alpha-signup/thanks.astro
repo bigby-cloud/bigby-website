@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Base
+  title="Thanks for signing up | Bigby.cloud"
+  description="Thanks for signing up to test the Bigby.drive alpha."
+  noindex={true}
+>
+  <Header />
+  <main>
+    <section class="py-5 text-center">
+      <div class="container" style="max-width: 560px;">
+        <h1>Thanks for signing up</h1>
+        <p class="fs-5 text-body-secondary">
+          We've got your details and will be in touch with access to the Bigby.drive alpha shortly.
+        </p>
+        <a class="btn btn-primary btn-lg mt-3" href="/">Back to Bigby.cloud</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
