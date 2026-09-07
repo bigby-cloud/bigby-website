@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const thanksUrl = new URL('/alpha-signup/thanks/', Astro.site);
+---
+
+<Base
+  title="Alpha Tester Sign Up | Bigby.cloud"
+  description="Sign up to test the Bigby.drive alpha."
+  noindex={true}
+>
+  <Header />
+  <main>
+    <section class="py-5">
+      <div class="container" style="max-width: 560px;">
+        <h1 class="mb-4">Alpha tester sign up</h1>
+        <p><strong>Important:</strong> The Bigby.drive Alpha is currently only open to pre-approved users. If you have stumbled across this page without talking to us, hi! We appreciate your enthusiasm! Please drop us your details via the <a href="/waiting-list/">Waiting List</a> and we'll be in touch ASAP.</p>
+        <form action="https://formspree.io/f/xaeydzpj" method="POST">
+          <input type="hidden" name="_next" value={thanksUrl} />
+          <div class="mb-3">
+            <label for="full_name" class="form-label">Full name</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required />
+            <div class="form-text">This will be your login email for Bigby.drive.</div>
+          </div>
+          <p class="text-body-secondary small">
+            By clicking "Agree and Submit" you agree to our <a href="/terms-alpha/">Alpha Testing Agreement &amp; Terms of Service</a>, <a href="/privacy-policy/">Privacy Policy</a>, and <a href="/dpa/">Data Processing Agreement</a>.</p>
+
+          <p class="text-body-secondary small">These documents are as short, and written in as plain English as possible. The Alpha Testing Agreement also includes some important information about what you can expect from the service in its current state. We highly recommend you spend a few minutes reading and understanding these before continuing.
+          </p>
+          <button type="submit" class="btn btn-primary w-100">Agree and Submit</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
