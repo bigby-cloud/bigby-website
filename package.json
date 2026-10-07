@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
-    "astro": "7.3.1",
+    "astro": "7.3.5",
     "bootstrap": "5.3.8",
-    "sass": "1.104.0",
-    "sharp": "0.35.4"
+    "sass": "1.105.1",
+    "sharp": "0.35.5"
   }
 }
