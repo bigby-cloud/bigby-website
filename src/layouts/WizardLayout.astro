@@ -1,0 +1,57 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WizardProgress from '../components/WizardProgress.astro';
+import { getWizardContext } from '../data/webdavWizard';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Slug of the current wizard step, as defined in webdavWizard.ts. */
+  stepSlug: string;
+}
+
+const { title, description, stepSlug } = Astro.props;
+const { step, stepNumber, total, prev, next, href } = getWizardContext(stepSlug);
+---
+
+<Base title={title} description={description} noindex={true}>
+  <Header />
+  <main class="py-5">
+    <div class="container" style="max-width: 760px;">
+      <p class="text-body-secondary small mb-2">
+        <a href="/help/webdav/setup/">WebDAV setup</a> &middot; Step {stepNumber} of {total}
+      </p>
+
+      <WizardProgress activeIndex={stepNumber - 1} />
+
+      <article class="wizard-content">
+        <h1 class="mb-4">{step.title}</h1>
+        <slot />
+      </article>
+
+      <nav class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top" aria-label="Wizard steps">
+        {
+          prev ? (
+            <a class="btn btn-outline-secondary" href={href(prev)}>
+              &larr; {prev.title}
+            </a>
+          ) : (
+            <span></span>
+          )
+        }
+        {
+          next ? (
+            <a class="btn btn-primary" href={href(next)}>
+              {next.title} &rarr;
+            </a>
+          ) : (
+            <a class="btn btn-primary" href="/help/webdav/">Finish</a>
+          )
+        }
+      </nav>
+    </div>
+  </main>
+  <Footer />
+</Base>

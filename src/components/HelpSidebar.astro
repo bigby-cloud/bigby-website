@@ -1,0 +1,53 @@
+---
+import { helpNav } from '../data/helpNav';
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="help-sidebar" aria-label="Help navigation">
+  <button
+    class="help-sidebar__toggle btn btn-outline-secondary d-flex d-lg-none w-100 justify-content-between align-items-center"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#help-sidebar-nav"
+    aria-controls="help-sidebar-nav"
+    aria-expanded="false"
+  >
+    <span>Help Menu</span>
+    <svg class="help-sidebar__chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m4 6 4 4 4-4" />
+    </svg>
+  </button>
+
+  <div class="collapse d-lg-block p-3" id="help-sidebar-nav">
+    {
+      helpNav.map((section) => (
+        <div class="mb-4">
+          <h2 class="">{section.heading}</h2>
+          <ul class="nav flex-column">
+            {section.links.map((link) => (
+              <li class="nav-item">
+                <a
+                  class:list={['nav-link px-0 py-1', { active: currentPath === link.href }]}
+                  aria-current={currentPath === link.href ? 'page' : undefined}
+                  href={link.href}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</nav>
+
+<style>
+  .help-sidebar__chevron {
+    transition: transform 0.2s ease;
+  }
+  .help-sidebar__toggle[aria-expanded='true'] .help-sidebar__chevron {
+    transform: rotate(180deg);
+  }
+</style>
