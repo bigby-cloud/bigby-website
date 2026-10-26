@@ -4,24 +4,100 @@ import HelpLayout from '../../../layouts/HelpLayout.astro';
 
 <HelpLayout
   title="WebDAV on Bigby.drive | Bigby.cloud"
-  description="What WebDAV is, why you might use it with Bigby.drive, and how to set it up."
+  description="How to connect WebDAV apps to Bigby.drive"
   heading="WebDAV"
 >
   <p class="lead">
-    Connect Bigby.drive to the apps you already use over the open WebDAV standard.
+    Connect Bigby.drive to the apps and tools you already use over the open WebDAV standard.
   </p>
 
-  <!-- TODO: explain what WebDAV is and why it's useful -->
+  <p class="alert alert-warning">
+    <strong>WARNING:</strong> Standard WebDAV clients do not natively support 2-Factor Authentication (2FA), meaning the security of your account will be somewhat reduced versus just using Bigby.drive in your browser. While we have developed a workaround which is detailed below, it is important that you read the password instructions on this page and understand the risks.
+  </p>
+
   <h2>What is WebDAV?</h2>
-  <p>TODO</p>
 
-  <h2>Why use WebDAV with Bigby.drive?</h2>
-  <p>TODO</p>
+  <p>
+    WebDAV is a well-established, standard protocol that allows you to manage files in the cloud as if they are local files on your device. Mounting your Bigby.drive spaces to your device via WebDAV means you can open open and edit your files in your existing apps, like Word, Photoshop, etc.
+    </p>
+  <p>
+    Most platforms on desktop have built-in support for WebDAV (e.g. via macOS Finder, Windows File Explorer, and Linux distro file managers) and a range of mobile apps are available on iOS and Android.
+  </p>
 
-  <h2>Set it up</h2>
+  <h2>Choosing a WebDAV Client</h2>
+
+  <p>See the specific help pages for your platform for our recommendations:</p>
+  <ul>
+    <li><a href="/help/desktop/">Desktop (Windows, Mac, Linux)</a></li>
+    <li><a href="/help/mobile/">Mobile (iOS, Android)</a></li>
+  </ul>
+
+  <h2>Connection Details</h2>
+
+  <h3>URL</h3>
+
+  <p>
+    Any Bigby.drive space or folder can be used as the WebDAV URL, for example:
+  </p>
+
+  <p>
+    My Space or any Shared Space -
+    <br/>
+    <code>https://drive.bigby.cloud/f89069cf-e8f5-48d2-a001-24cda766acbf/</code>
+  </p>
+  <p>
+    Specific Folder -
+    <br/>
+    <code>https://drive.bigby.cloud/f89069cf-e8f5-48d2-a001-24cda766acbf/Documents/</code>
+  </p>
+
+  <p><strong>Tip:</strong> You can copy these URLs directly from the address bar in your browser when logged in.</p>
+
+  <h3>Username</h3>
+
+  <p>
+    Your WebDAV username is the same as your Bigby.cloud account email address.
+  </p>
+
+  <h3>Password</h3>
+
+  <p class="alert alert-warning"><strong>IMPORTANT:</strong> Please read these instructions carefully!</p>
+
+  <p>
+    Your WebDAV password is a combination of your regular Bigby.cloud account password, and an <strong>Additional password</strong> which you can set up as a 2FA option on your account.
+  </p>
+
+  <p>
+    To set up your Additional password, head over to your <a href="https://auth-test.bigby.cloud/settings/mfa">account 2FA settings page</a>, select "Additional password" and follow the instructions. <strong>Important:</strong> Save this Additional password to your password manager or another secure location.</p>
+
+  <p>
+    Once your Additional password is set up, you simply append it to your regular Bigby.cloud account password with the separator <code>:::</code> (3 colons) to form your WebDAV password. For example, if:
+  </p>
+
+  <p>
+    Your regular password is -
+    <br/>
+    <code>First-Secure-Phrase1</code>
+  </p>
+
+  <p>
+    Your Additional Password is -
+    <br/>
+    <code>Second-Secure-Phrase2</code>
+  </p>
+
+  <p>
+    Enter the following as the password into your WebDAV client -
+    <br/>
+    <code>First-Secure-Phrase1:::Second-Secure-Phrase2</code>
+  </p>
+
+  <p><strong>Tip:</strong> Save this combined WebDAV password to your password manager or another secure location for easier copy and paste.</p>
+
+  <!-- <h2>Set it up</h2>
   <p>
     Ready to go? Our step-by-step wizard walks you through creating credentials
     and connecting your app.
   </p>
   <a class="btn btn-primary" href="/help/webdav/setup/">Start the setup wizard</a>
-</HelpLayout>
+</HelpLayout> -->
