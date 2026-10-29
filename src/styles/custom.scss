@@ -128,3 +128,8 @@ $enable-shadows: false;
     user-select: none;
   }
 }
+
+.help-sidebar {
+  border-radius: var(--bs-border-radius);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}

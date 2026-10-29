@@ -11,7 +11,13 @@ const noindexPaths = [
   '/waiting-list/thanks/',
   '/alpha-signup/',
   '/alpha-signup/thanks/',
-  '/404/'
+  '/404/',
+  '/help/webdav/setup/',
+  '/help/webdav/setup/before-you-start/',
+  '/help/webdav/setup/generate-credentials/',
+  '/help/webdav/setup/choose-your-app/',
+  '/help/webdav/setup/connect/',
+  '/help/webdav/setup/verify/'
 ];
 
 // https://astro.build/config

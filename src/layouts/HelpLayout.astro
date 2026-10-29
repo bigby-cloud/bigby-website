@@ -1,0 +1,36 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HelpSidebar from '../components/HelpSidebar.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Page heading shown above the content. */
+  heading: string;
+  noindex?: boolean;
+}
+
+const { title, description, heading, noindex } = Astro.props;
+---
+
+<Base title={title} description={description} noindex={noindex}>
+  <Header />
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        <aside class="col-lg-3">
+          <HelpSidebar />
+        </aside>
+        <div class="col-lg-9">
+          <article class="help-content">
+            <h1 class="mb-4">{heading}</h1>
+            <slot />
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

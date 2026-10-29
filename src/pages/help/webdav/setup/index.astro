@@ -1,0 +1,31 @@
+---
+import HelpLayout from '../../../../layouts/HelpLayout.astro';
+import { webdavWizardSteps, webdavWizardBasePath } from '../../../../data/webdavWizard';
+---
+
+<HelpLayout
+  title="Set up WebDAV | Bigby.cloud"
+  description="A step-by-step guide to setting up your WebDAV credentials and connecting Bigby.drive."
+  heading="Set up WebDAV"
+  noindex={true}
+>
+  <p class="lead">
+    This guide walks you through setting up your WebDAV credentials and
+    connecting Bigby.drive, one step at a time.
+  </p>
+
+  <ol class="mt-4">
+    {
+      webdavWizardSteps.map((step) => (
+        <li class="mb-2">
+          <a href={`${webdavWizardBasePath}/${step.slug}/`}>{step.title}</a>
+          <div class="text-body-secondary small">{step.summary}</div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <a class="btn btn-primary mt-3" href={`${webdavWizardBasePath}/${webdavWizardSteps[0].slug}/`}>
+    Start &rarr;
+  </a>
+</HelpLayout>

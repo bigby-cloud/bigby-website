@@ -1,0 +1,26 @@
+---
+import { webdavWizardSteps, webdavWizardBasePath } from '../data/webdavWizard';
+
+interface Props {
+  /** Zero-based index of the current step. */
+  activeIndex: number;
+}
+
+const { activeIndex } = Astro.props;
+---
+
+<ol class="wizard-progress list-unstyled d-flex flex-wrap gap-2 mb-4">
+  {
+    webdavWizardSteps.map((step, index) => {
+      const state = index < activeIndex ? 'done' : index === activeIndex ? 'current' : 'todo';
+      return (
+        <li class:list={['wizard-progress__item', `is-${state}`]}>
+          <a class="d-flex align-items-center gap-2 text-decoration-none" href={`${webdavWizardBasePath}/${step.slug}/`}>
+            <span class="wizard-progress__number">{index + 1}</span>
+            <span class="wizard-progress__label small">{step.title}</span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ol>
