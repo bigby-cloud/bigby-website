@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Update feed for Bigby Drive for Mac, read by the app's Sparkle updater.
+     Its address is built into the app, so don't move this file. Add each
+     release's <item> (from build/appcast-item-<version>.xml in
+     bigby-drive-desktop) at the top of the channel, newest first. -->
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Bigby Drive for Mac</title>
+    <link>https://bigby.cloud/download/mac/appcast.xml</link>
+    <description>Updates for Bigby Drive for Mac</description>
+    <language>en-gb</language>
+  </channel>
+</rss>
